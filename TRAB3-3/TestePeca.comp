@@ -1,0 +1,22 @@
+# Composicao do programa de teste de uma peca genérica
+# Este exemplo utiliza o arcabouço completo 
+
+[Diretorios]
+
+Nome        =  TestePeca
+PathDefault =  .
+err         =  .
+
+[Modulos]
+TestPec
+Peca
+
+[BuildInicio]
+/OUT:TestePeca.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+..\Libs\ArcaboucoTeste.lib
+
+[Fim]
