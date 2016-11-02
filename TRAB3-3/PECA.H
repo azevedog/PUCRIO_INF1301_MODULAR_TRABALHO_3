@@ -69,11 +69,7 @@ typedef struct PEC_tagPeca* PEC_tppPeca ;
 *     este atributo é armazenado em um byte, permite 128 tipos
 *	  diferentes.
 *
-*     corTime  - Caracter que identifica o time que esta peca
-*     pertence. Como este atributo é armazenado em um byte,
-*	   permite 128 tipos diferentes.
-*
-*     MoverPeca  - Ponteiro para a função que processa a validade
+*     pathMovimento  - Caminho para executável que processa a validade
 *     do movimento da peca. Se respeita as regras da peca. NÃO
 *	  VALIDA SE O MOVIMENTO É OUT OF BOUNDS NO TABU
 *	  LEIRO.
@@ -85,9 +81,33 @@ typedef struct PEC_tagPeca* PEC_tppPeca ;
 *     Não será dada mais informação quanto ao problema ocorrido.
 *
 ***********************************************************************/
+PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, 
+char* pathMovimento) ;
 
-PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, char* corTime,
-int ( * MoverPeca ) ( int inicialX, int inicialY, int finalX, int finalY)) ;
+
+/***********************************************************************
+*
+*  $FC Função: PEC  &DefinirCorPeca
+*
+*  $ED Descrição da função
+*     Atribui uma cor, que representa o time de uma dada peca.
+*
+*  $EP Parâmetros
+*     ppPeca  - Ponteiro de ponteiro para passagem da peca criada
+*     por referência.
+*
+*     corTime  - Caracter que identifica o time que esta peca
+*     pertence. Como este atributo é armazenado em um byte,
+*	   permite 128 tipos diferentes.
+*
+*  $FV Valor retornado
+*     Se executou corretamente retorna PEC_CondRetOK.
+*
+*     Se ocorreu algum erro, retorna PEC_CondRetERRO.
+*     Não será dada mais informação quanto ao problema ocorrido.
+*
+***********************************************************************/
+PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) ;
 
 /***********************************************************************
 *

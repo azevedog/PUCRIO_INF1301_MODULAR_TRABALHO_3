@@ -23,19 +23,31 @@
 =declararparm   TimeIgual int 3
 
 == Criar a peça 0 "Peao"
-=criarpeca  inx0  id0  cor1  OK
+=criarpeca  inx0  id0  OK
+
+== Definir cor  peça 0 "Peao"
+=corpeca  inx0  cor1  OK
 
 == Definir movimento para o peao
 =moverpeca  inx0  0 0 1 0  OK
 
 == Criar a peca 1 "Cavalo"
-=criarpeca  inx1  id1  cor0  OK
+=criarpeca  inx1  id1 OK
+
+== Definir cor  peca 1 "Cavalo"
+=corpeca  inx1  cor0  OK
 
 == Definir movimento para o cavalo
 =moverpeca  inx1 0 0 0 1 OK
 
+== Definir movimento ERRADO para o cavalo
+=moverpeca  inx1 0 1 1 2 Erro
+
 == Criar a peca 2 "Unicornio"
-=criarpeca inx2	 id2 cor0 OK
+=criarpeca inx2	id2 OK
+
+== Definir cor  peca 2 "Unicornio"
+=corpeca  inx2  cor0  OK
 
 == Comparar peca 1 e 2 de times iguais
 =compararpeca inx1 inx2 TimeIgual

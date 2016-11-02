@@ -28,9 +28,11 @@
 
 
 static const char CRIAR_PECA_CMD        [ ] = "=criarpeca"    ;
+static const char DEF_COR_PECA_CMD      [ ] = "=corpeca"  ;
 static const char LIBERAR_PECA_CMD      [ ] = "=liberarpeca"  ;
 static const char MOVER_PECA_CMD      	[ ] = "=moverpeca"    ;
 static const char COMPARAR_PECA_CMD		[ ] = "=compararpeca" ;
+
 
 
 #define TRUE  1
@@ -83,33 +85,53 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
 	  char   corPeca;
       char * pCorPeca;	
 		
-      /* Efetuar reset de teste de Peca */
+      /* Testar criar peca */
 		if ( strcmp( ComandoTeste , CRIAR_PECA_CMD ) == 0 )
          {
 
-            numLidos = LER_LerParametros( "issi" ,
-                       &inxPeca, &tipoPeca, &corPeca, &CondRetEsp) ;
+            numLidos = LER_LerParametros( "isi" ,
+                       &inxPeca, &tipoPeca, &CondRetEsp) ;
 
-            if ( ( numLidos != 4 )
+            if ( ( numLidos != 3 )
               || ( !ValidarInxPeca( inxPeca )))
             {
                return TST_CondRetParm ;
             } /* if */
 			
 			pTipoPeca = (char*) malloc(sizeof(char));
-			pCorPeca = (char*) malloc(sizeof(char));
-			
-
-			strcpy(pCorPeca, &corPeca);
 			strcpy(pTipoPeca, &tipoPeca);
 
             CondRet =
-                 PEC_CriarPeca(&(vtPecas[inxPeca]), pTipoPeca, pCorPeca, Mover) ;
+                 PEC_CriarPeca(&(vtPecas[inxPeca]), pTipoPeca,  ".\\Movimento\\Torre.exe") ;
 				 
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao criar peca.") ;
 
         } /* fim ativa: Testar CriarPeca */
+
+		      /* Testar definir cor */
+		else if ( strcmp( ComandoTeste , DEF_COR_PECA_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "isi" ,
+                       &inxPeca, &corPeca, &CondRetEsp) ;
+
+            if ( ( numLidos != 3 )
+              || ( !ValidarInxPeca( inxPeca )))
+            {
+               return TST_CondRetParm ;
+            } /* if */
+			
+			pCorPeca = (char*) malloc(sizeof(char));
+			strcpy(pCorPeca, &corPeca);
+
+            CondRet =
+                 PEC_DefinirCorPeca(vtPecas[inxPeca], pCorPeca) ;
+				 
+            return TST_CompararInt(CondRetEsp, CondRet,
+               "Erro ao criar peca.") ;
+
+        } /* fim ativa: Testar definir cor */
 
       /* Testar Esvaziar Liberar Peca */
         else if ( strcmp(ComandoTeste, LIBERAR_PECA_CMD) == 0 ){
