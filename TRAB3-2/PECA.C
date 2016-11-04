@@ -22,6 +22,7 @@
 #include   <memory.h>
 #include   <malloc.h>
 #include   <assert.h>
+#include <process.h> 
 #include "PECA.h"
 
 /***********************************************************************
@@ -38,21 +39,13 @@ typedef struct PEC_tagPeca {
         char corTime;
                /* Cor do time ao qual a peca pertence*/
 
-		int ( * MoverPeca ) ( int inicialX, int inicialY, int finalX, int finalY);
-               /* Ponteiro para a função de movimento da peca */
+		char* pathMovimento;
+               /* Caminho para o executavel do movimento. */
 
    } PEC_tpPeca ;
 
 
-
 /***** Protótipos das funções encapuladas no módulo *****/
-
-/*   static void LiberarElemento( LIS_tppLista   pLista ,
-                                tpElemLista  * pElem   ) ;
-
-   static tpElemLista * CriarElemento( LIS_tppLista pLista ,
-                                       void *       pValor  ) ;
-*/
    static void LimparPeca( PEC_tppPeca pPeca) ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -62,8 +55,8 @@ typedef struct PEC_tagPeca {
 *
 *  Função: PEC  &Criar peca
 *  ****/
-PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, char* corTime,
-int ( * MoverPeca ) ( int inicialX, int inicialY, int finalX, int finalY)) {
+PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, 
+char* pathMovimento) {
 
 	(*ppPeca) = (PEC_tpPeca*) malloc( sizeof( PEC_tpPeca)) ;
 	if((*ppPeca) == NULL){
@@ -73,16 +66,60 @@ int ( * MoverPeca ) ( int inicialX, int inicialY, int finalX, int finalY)) {
 	LimparPeca((*ppPeca));
 	
 	(*ppPeca)->identificadorTipo = *identificador;
-	(*ppPeca)->corTime = *corTime;
-	(*ppPeca)->MoverPeca = MoverPeca;
+	(*ppPeca)->pathMovimento = pathMovimento;
 	
 	return PEC_CondRetOK;
+
 }/* Fim função: PEC  &Criar peca */
+
+
+/***************************************************************************
+*
+*  Função: PEC  &DefinirCorPeca
+*  ****/
+PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) {
+
+	if(ppPeca == NULL){
+		return PEC_CondRetERRO;
+	}
+	
+	ppPeca->corTime = *corTime;
+	return PEC_CondRetOK;
+}/* Fim função: PEC  &DefinirCorPeca */
+
 
 /***************************************************************************
 *
 *  Função: PEC  &Mover
 *  ****/
+PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int finalX, int finalY) {
+	int ret = -10;
+	char iX, iY, fX, fY;
+	if ( ( pPeca->pathMovimento == NULL ) ){
+		return PEC_CondRetERRO;
+	}
+	
+	iX = '0' + inicialX;
+	iY = '0' + inicialY;
+	fX = '0' + finalX;
+	fY = '0' + finalY;
+	
+	
+	printf("\n\nPath: %s\n\n",  pPeca->pathMovimento);
+	
+	ret = _spawnl(P_WAIT, pPeca->pathMovimento,  pPeca->pathMovimento, &iX, &iY, &fX, &fY, NULL);
+	
+	
+	if(ret > 0)
+	{
+		return PEC_CondRetOK;
+	} else
+	{ 
+		return PEC_CondRetERRO;
+	}
+}
+
+/*
 PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int finalX, int finalY) {
 	int ret = -10;
 	
@@ -99,7 +136,9 @@ PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int final
 	{ 
 		return PEC_CondRetERRO;
 	}
-}/* Fim função: PEC  &LiberarPeca */
+}
+
+/* Fim função: PEC  &LiberarPeca */
 
 /***************************************************************************
 *

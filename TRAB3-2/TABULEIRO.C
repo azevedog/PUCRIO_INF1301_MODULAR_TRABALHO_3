@@ -25,27 +25,7 @@
 #include   <assert.h>
 #include	"TABULEIRO.h"
 #include	"LISTA.h"
-
-/***********************************************************************
-*
-*  $TC Tipo de dados: TAB Elemento do tabuleiro
-*
-*
-***********************************************************************/
-
-   typedef struct tagElemTabuleiro {
-
-         void * pValor ;
-               /* Ponteiro para o valor contido no elemento */
-
-         LIS_tppLista ameacantes;
-               /* Ponteiro para elementos que podem ocupar essa posicao */
-
-         LIS_tppLista ameacados;
-               /* Ponteiro para elementos de posicoes que posso ocupar */
-
-   } tpElemTabuleiro;
-   
+#include	"PECA.h"
 
 /***********************************************************************
 *
@@ -55,8 +35,15 @@
 ***********************************************************************/
 
    typedef struct TAB_tagTabuleiro {
+   
+		PEC_tppPeca criadas[26];
+				/*Vetor de pecas "definidas" prontas para serem inseridas no tabuleiro",
+				 * bastando definir o seu time ao inserir. A limitacao de 26 pecas se deve
+				 * ao uso de letras como identificadores de cada tipo de peca. Só pode haver
+				 * um tipo por letra a distancia do valor ASCII de 'A' serve como index do vetor.
+				 */
 
-        tpElemTabuleiro** posicoes;
+        PEC_tppPeca** posicoes;
                /* Matriz de posicoes do tabuleiro*/
 			   
 		int linhas;
@@ -73,13 +60,6 @@
 	
 	static int converteColuna(char coluna);
 
-   /*static void LiberarElemento( LIS_tppLista   pLista ,
-                                tpElemLista  * pElem   ) ;
-
-   
-
-   static void LimparCabeca( LIS_tppLista pLista ) ;
-
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
@@ -88,25 +68,18 @@
 *  ****/
 TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		TAB_tppTabuleiro* novoTabuleiro){
-		
-	int lin, col;
 	
 	(*novoTabuleiro) =  (TAB_tppTabuleiro) malloc(sizeof(TAB_tpTabuleiro));
 	if ((*novoTabuleiro) == NULL ){
       return TAB_CondRetErro ;
     } /* if */
 	
-	(*novoTabuleiro)->posicoes = (tpElemTabuleiro**)
-	malloc(sizeof(tpElemTabuleiro*)*numLinhas);
+	(*novoTabuleiro)->posicoes = (PEC_tppPeca**)
+	malloc(sizeof(PEC_tppPeca*)*numLinhas);
 	
 	for(lin =0; lin < numLinhas; lin++){
 		(*novoTabuleiro)->posicoes[lin] = 
-			 (tpElemTabuleiro*) malloc(sizeof(tpElemTabuleiro)*numColunas);
-		for(col = 0; col < numColunas; col++){
-			(*novoTabuleiro)->posicoes[lin][col].pValor = NULL;
-			(*novoTabuleiro)->posicoes[lin][col].ameacantes = NULL;
-			(*novoTabuleiro)->posicoes[lin][col].ameacados = NULL;
-		} 	
+			 (PEC_tppPeca*) malloc(sizeof(PEC_tppPeca)*numColunas); 	
 	}	
 	
 	(*novoTabuleiro)->linhas = numLinhas;

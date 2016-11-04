@@ -44,21 +44,6 @@ typedef struct PEC_tagPeca {
 
    } PEC_tpPeca ;
 
-/*
-typedef struct PEC_tagPeca {
-
-        char identificadorTipo;
-               /* Identificador do tipo de peca *
-
-        char corTime;
-               /* Cor do time ao qual a peca pertence*
-
-		int ( * MoverPeca ) ( int inicialX, int inicialY, int finalX, int finalY);
-               /* Ponteiro para a função de movimento da peca *
-
-   } PEC_tpPeca ;
-
-
 
 /***** Protótipos das funções encapuladas no módulo *****/
    static void LimparPeca( PEC_tppPeca pPeca) ;
