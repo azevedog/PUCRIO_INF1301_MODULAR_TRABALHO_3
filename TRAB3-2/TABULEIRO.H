@@ -2,7 +2,7 @@
 *
 *  $MCD Módulo de definição: TAB  Tabuleiro para jogo generico 
 *
-*  Arquivo gerado:              TABULEIRO.c
+*  Arquivo gerado:              TABULEIRO.h
 *  Letras identificadoras:      TAB
 *
 *  Nome da base de software:    OpenJogos
