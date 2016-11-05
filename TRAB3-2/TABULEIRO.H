@@ -69,7 +69,8 @@ typedef enum {
          TAB_CondRetSubstituiuOutroElemento,
                /* Movimento tirou um elemento original da posicao */
 			   
-		 TAB_CondRetElementoMesmoTime
+		 TAB_CondRetElementoMesmoTime,
+		  /* Movimento não realizando, posicao bloqueada por elemento do seu time. */
 			   
 } TAB_tpCondRet ;
 
@@ -111,7 +112,14 @@ typedef enum {
 *
 *     coluna  - Posicao Y no tabuleiro.
 *
-*     peca  - Ponteiro para elemento da posicao.
+*     identificador  - Caracter que identifica o tipo de peca. Como
+*     este atributo é armazenado em um byte, permite 128 tipos
+*	  diferentes.
+*
+*     pathMovimento  - Caminho para executável que processa a validade
+*     do movimento da peca. Se respeita as regras da peca. NÃO
+*	  VALIDA SE O MOVIMENTO É OUT OF BOUNDS NO TABU
+*	  LEIRO.
 *
 *     tabuleiro  - Ponteiro o tabuleiro que terá a peca inserida
 *
@@ -128,8 +136,8 @@ typedef enum {
 *
 ***********************************************************************/
 
-    TAB_tpCondRet TAB_InserirPeca(int linha, char coluna,
-		void* peca, TAB_tppTabuleiro tabuleiro, void ( * ExcluirValor ) ( void * pDado ));
+	TAB_tpCondRet TAB_InserirPeca(int linha, char coluna,  char* identificador,
+			char* pathMovimento, TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************
 *

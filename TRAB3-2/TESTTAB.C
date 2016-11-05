@@ -148,8 +148,6 @@ LIS_tppLista pLista = NULL;
             } /* if */
 			
 			
-			pPeca  = *((PEC_tppPeca*) malloc(sizeof(PEC_tppPeca)));
-			
 			if(PEC_CriarPeca(&pPeca, &identificador, &corTime, Mover)){
 				CondRet = TAB_CondRetErro;
 			}

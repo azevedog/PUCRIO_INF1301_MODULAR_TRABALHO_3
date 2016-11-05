@@ -87,6 +87,27 @@ PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) {
 	return PEC_CondRetOK;
 }/* Fim função: PEC  &DefinirCorPeca */
 
+/***************************************************************************
+*
+*  Função: PEC  &ObterIdentificarPeca
+*  ****/
+PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca ppPeca, char** id) {
+
+	if(ppPeca == NULL){
+		return PEC_CondRetERRO;
+	}
+	
+	if(strlen((*id)) <3){
+			return PEC_CondRetERRO;
+	}
+	
+	stpcpy((*id),  pPeca->identificadorTipo);
+	strcat((*id), pPeca->corTime);
+	
+	ppPeca->corTime = *corTime;
+	return PEC_CondRetOK;
+}/* Fim função: PEC  &ObterIdentificarPeca */
+
 
 /***************************************************************************
 *

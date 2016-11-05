@@ -92,19 +92,10 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *
 *  Função: TAB  &Inserir peca no tabuleiro
 *  ****/
- TAB_tpCondRet TAB_InserirPeca(int linha, char coluna,
-		void* peca, TAB_tppTabuleiro tabuleiro, void ( * ExcluirValor ) ( void * pDado )){
-
-		LIS_tppLista ameacados;
-		LIS_tppLista ameacantes;
-		char prefixAmeacado =  'D';
-		char prefixAmeacante = 'T';
-		char * idAmeacados;
-		char * idAmeacantes;
-		int col = converteColuna(coluna);
+ TAB_tpCondRet TAB_InserirPeca(int linha, char coluna,  char* identificador,
+		char* pathMovimento, TAB_tppTabuleiro tabuleiro){
 		
-		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		linha = linha -1;
+		PEC_tppPeca pPeca;
 		
 		if(posicaoInvalida(linha, col, tabuleiro) ){
 			return TAB_CondRetForaTabuleiro;
@@ -114,26 +105,15 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 			return TAB_CondRetErro;
 		}
 		
-		idAmeacados = ( char * ) malloc( sizeof(char)*LIS_TAM_ID); 
-		strcpy(idAmeacados, &prefixAmeacado);
+		pPeca = *((PEC_tppPeca*) malloc(sizeof(PEC_tppPeca)));
 		
-		ameacados = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
-		if(LIS_CriarLista(idAmeacados, ExcluirValor, &ameacados) != LIS_CondRetOK){
+		if(!PEC_CriarPeca(&pPeca, identificador, 
+		 pathMovimento)) {
 			return TAB_CondRetErro;
 		}
 		
-		idAmeacantes = ( char * ) malloc( sizeof(char)*LIS_TAM_ID); 
-		strcpy(idAmeacantes, &prefixAmeacante);
-		
-		ameacantes = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
-		if(LIS_CriarLista(idAmeacantes, ExcluirValor, &ameacantes) != LIS_CondRetOK){
-			return TAB_CondRetErro;
-		}
-		
-		tabuleiro->posicoes[linha][col].pValor = peca;
-		tabuleiro->posicoes[linha][col].ameacantes = ameacantes;
-		tabuleiro->posicoes[linha][col].ameacados = ameacados;
-		
+		tabuleiro->posicoes[linha][col] = pPeca;
+
 		return TAB_CondRetOK;
 	}/* Fim função: TAB  &Inserir peca no tabuleiro */
 
@@ -213,6 +193,8 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *  ****/
  TAB_tpCondRet TAB_ObterPeca(int inicialX, int inicialY, char** id,
 	TAB_tppTabuleiro tabuleiro){
+	
+		PEC_tppPeca pPeca;
 		
 		if(posicaoInvalida(inicialX, InicialY, tabuleiro)){
 			return TAB_CondRetForaTabuleiro;
@@ -222,10 +204,11 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 			return TAB_CondRetErro;
 		}
 		
-		(*id) = 
+		pPeca = tabuleiro->posicoes[inicialX][iInicialY];
 		
-		(*pValor) = tabuleiro->posicoes[inicialX][iInicialY].pValor;
-		
+		if(!PEC_ObterIdentificarPeca(pPeca, id)){
+				return TAB_CondRetErro;
+		}
 		return TAB_CondRetOK;
 	}/* Fim função: TAB  &Obter peca do tabuleiro */
 	
@@ -236,17 +219,33 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *  ****/
  TAB_tpCondRet TAB_ObterListaAmeacantes(int inicialX, char inicialY, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro){
-		
-		int iInicialY = converteColuna(inicialY);
-
-		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		inicialX = inicialX -1;
-		
+	
+		int x, y;
+		PEC_tppPeca pPecaOrigem;
+		PEC_tppPeca pPecaDestino;
+				
 		if(posicaoInvalida(inicialX, iInicialY, tabuleiro)){
 			return TAB_CondRetForaTabuleiro;
 		}
+
+		pPecaOrigem = tabuleiro->posicoes[inicialX][InicialY];
 		
-		(*lista) = tabuleiro->posicoes[inicialX][iInicialY].ameacantes;
+		if(pPecaOrigem == NULL){
+			return TAB_CondRetErro;
+		}
+		
+		for(x=0; x<tabuleiro->colunas; x++){
+			for(y=0; y<tabuleiro->linhas; y++){
+				if(x!=inicialX && y!=inicialY){
+					pPecaDestino = tabuleiro->posicoes[inicialX][iInicialY];
+					if(PEC_ComparaPeca(pPecaDestino, pPecaOrigem == PEC_CondRetTimeDiferente){
+						if(PEC_Mover(pPecaDestino, x, y, inicialX, inicialY)){
+							LIS_InserirElemento((*lista), pPecaDestino);
+						}
+					}
+				}
+			}
+		}
 		
 		return TAB_CondRetOK;
 	}/* Fim função: TAB  &Obter ameacantes */
@@ -259,16 +258,32 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
  TAB_tpCondRet TAB_ObterListaAmeacados(int inicialX, char inicialY, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro){
 		
-		int iInicialY = converteColuna(inicialY);
-
-		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		inicialX = inicialX -1;
-		
+		int x, y;
+		PEC_tppPeca pPecaOrigem;
+		PEC_tppPeca pPecaDestino;
+				
 		if(posicaoInvalida(inicialX, iInicialY, tabuleiro)){
 			return TAB_CondRetForaTabuleiro;
 		}
+
+		pPecaOrigem = tabuleiro->posicoes[inicialX][InicialY];
 		
-		(*lista) = tabuleiro->posicoes[inicialX][iInicialY].ameacados;
+		if(pPecaOrigem == NULL){
+			return TAB_CondRetErro;
+		}
+		
+		for(x=0; x<tabuleiro->colunas; x++){
+			for(y=0; y<tabuleiro->linhas; y++){
+				if(x!=inicialX && y!=inicialY){
+					pPecaDestino = tabuleiro->posicoes[inicialX][iInicialY];
+					if(PEC_ComparaPeca(pPecaDestino, pPecaOrigem == PEC_CondRetTimeDiferente){
+						if(PEC_Mover(pPecaOrigem, inicialX, inicialY, x, y)){
+							LIS_InserirElemento((*lista), pPecaDestino);
+						}
+					}
+				}
+			}
+		}
 		
 		return TAB_CondRetOK;
 	}/* Fim função: TAB  &Obter ameacados */
@@ -288,20 +303,11 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 			
 			for(col = 0; col < numColunas; col++){
  
-				if( tabuleiro->posicoes[lin][col].pValor != NULL){
-					free(tabuleiro->posicoes[lin][col].pValor);
-				}
-				
-				if( tabuleiro->posicoes[lin][col].ameacantes != NULL ){
-					LIS_DestruirLista(tabuleiro->posicoes[lin][col].ameacantes);
-				}
-				
-				if( tabuleiro->posicoes[lin][col].ameacados != NULL){
-					LIS_DestruirLista(tabuleiro->posicoes[lin][col].ameacados);
+				if( tabuleiro->posicoes[lin][col] != NULL){	
+					PEC_LiberarPeca(tabuleiro->posicoes[lin][col]);
 				}
 			}	
 			free(tabuleiro->posicoes[lin]);
-
 		}	
 		return TAB_CondRetOK;
 	}/* Fim função: TAB &Destriuir tabuleiro */

@@ -93,7 +93,7 @@ char* pathMovimento) ;
 *     Atribui uma cor, que representa o time de uma dada peca.
 *
 *  $EP Parâmetros
-*     ppPeca  - Ponteiro de ponteiro para passagem da peca criada
+*     ppPeca  - Ponteiro de ponteiro para passagem da peca
 *     por referência.
 *
 *     corTime  - Caracter que identifica o time que esta peca
@@ -108,6 +108,29 @@ char* pathMovimento) ;
 *
 ***********************************************************************/
 PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) ;
+
+/***********************************************************************
+*
+*  $FC Função: PEC  &ObterIdentificarPeca
+*
+*  $ED Descrição da função
+*     Recupera o nome do tipo da peca e o seu time.
+*
+*  $EP Parâmetros
+*     ppPeca  - Ponteiro de ponteiro para passagem da peca 
+*     por referência.
+*
+*     id  - String de 3 caracteres <CaracterTipoPeca,CorTime> ex.: Peão do time preto
+*	   <P,P>
+*
+*  $FV Valor retornado
+*     Se executou corretamente retorna PEC_CondRetOK.
+*
+*     Se ocorreu algum erro, retorna PEC_CondRetERRO.
+*     Não será dada mais informação quanto ao problema ocorrido.
+*
+***********************************************************************/
+PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca ppPeca, char** id);
 
 /***********************************************************************
 *
