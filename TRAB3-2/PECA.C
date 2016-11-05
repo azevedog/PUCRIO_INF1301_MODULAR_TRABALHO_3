@@ -95,6 +95,7 @@ PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) {
 PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int finalX, int finalY) {
 	int ret = -10;
 	char iX, iY, fX, fY;
+	
 	if ( ( pPeca->pathMovimento == NULL ) ){
 		return PEC_CondRetERRO;
 	}
@@ -104,30 +105,8 @@ PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int final
 	fX = '0' + finalX;
 	fY = '0' + finalY;
 	
-	
-	printf("\n\nPath: %s\n\n",  pPeca->pathMovimento);
-	
 	ret = _spawnl(P_WAIT, pPeca->pathMovimento,  pPeca->pathMovimento, &iX, &iY, &fX, &fY, NULL);
 	
-	
-	if(ret > 0)
-	{
-		return PEC_CondRetOK;
-	} else
-	{ 
-		return PEC_CondRetERRO;
-	}
-}
-
-/*
-PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int finalX, int finalY) {
-	int ret = -10;
-	
-	if ( ( pPeca->MoverPeca == NULL ) ){
-		return PEC_CondRetERRO;
-	}
-	
-	ret = pPeca->MoverPeca(inicialX, inicialY, finalX, finalY);
 	
 	if(ret > 0)
 	{

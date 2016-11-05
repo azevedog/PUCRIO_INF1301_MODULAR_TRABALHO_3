@@ -40,14 +40,34 @@
 
 /***** Protótipos das funções encapuladas no módulo *****/
 	
-	
+	static int converteColuna(char coluna);	
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
 
 /*****  Código das funções encapsuladas no módulo  *****/
    
-		
+/***********************************************************************
+*
+*  $FC Função: TAB  -Converte coordenada da coluna
+*
+***********************************************************************/
+
+   int converteColuna(char coluna){
+   
+   		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
+		inicialX = inicialX -1;
+		finalX = finalX -1;
+	
+		int dist;
+		if ((coluna >= 'a') && (coluna <= 'z')){
+			dist = (coluna - 'a');
+		}
+		else{
+			dist = coluna - 'A';
+		}
+		return dist;
+	}/* Fim função: TAB  -Converte coordenada da coluna*/			
 
 /********** Fim do módulo de implementação: JOG  Jogo generico **********/
 

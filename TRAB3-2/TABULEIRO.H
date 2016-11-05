@@ -149,11 +149,6 @@ typedef enum {
 *
 *     tabuleiro  - Ponteiro o tabuleiro que terá a peca inserida
 *
-*     MoverPeca  - Ponteiro para funcao movimento do elemento do  tabuleiro.
-*
-*     ComparaElementos  - Ponteiro para funcao que compara dois elementos do
-*	   tabuleiro.
-*
 *  $FV Valor retornado
 *     TAB_CondRetOK - Se executou corretamente.
 *     TAB_CondRetForaTabuleiro - Caso x e y estajam fora dos limites.
@@ -164,9 +159,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   TAB_tpCondRet TAB_MoverPeca(int inicialX, char inicialY, int finalX, char finalY,
-	int ( * MoverPec ) ( int inicialX, int inicialY, int finalX, int finalY), TAB_tppTabuleiro tabuleiro,
-	int(* ComparaElementos)(void* elem1, void* elem2));
+   TAB_tpCondRet TAB_MoverPeca(int inicialX, int inicialY, int finalX, int finalY, TAB_tppTabuleiro tabuleiro);
    
 /***********************************************************************
 *
@@ -190,7 +183,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   TAB_tpCondRet TAB_RetirarPeca(int inicialX, char inicialY, TAB_tppTabuleiro tabuleiro);
+   TAB_tpCondRet TAB_RetirarPeca(int inicialX, int inicialY, TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************
 *

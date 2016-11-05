@@ -36,7 +36,7 @@
 
    typedef struct TAB_tagTabuleiro {
    
-		PEC_tppPeca criadas[26];
+		/*PEC_tppPeca criadas[26];
 				/*Vetor de pecas "definidas" prontas para serem inseridas no tabuleiro",
 				 * bastando definir o seu time ao inserir. A limitacao de 26 pecas se deve
 				 * ao uso de letras como identificadores de cada tipo de peca. Só pode haver
@@ -57,8 +57,7 @@
 /***** Protótipos das funções encapuladas no módulo *****/
 	
 	static TAB_tpCondRet posicaoInvalida(int x, int y, TAB_tppTabuleiro tabuleiro);
-	
-	static int converteColuna(char coluna);
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -144,54 +143,45 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *
 *  Função: TAB  &Mover peca no tabuleiro
 *  ****/
- TAB_tpCondRet TAB_MoverPeca(int inicialX, char inicialY, int finalX, char finalY,
-	int ( * MoverPec ) ( int inicialX, int inicialY, int finalX, int finalY), TAB_tppTabuleiro tabuleiro,
-	int(* ComparaElementos)(void* elem1, void* elem2)){
+  TAB_tpCondRet TAB_MoverPeca(int inicialX, int inicialY, int finalX, int finalY, TAB_tppTabuleiro tabuleiro){
 		
-		int iInicialY = converteColuna(inicialY);
-		int iFinalY = converteColuna(finalY);
 		TAB_tpCondRet ret;
-		
-		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		inicialX = inicialX -1;
-		finalX = finalX -1;
+		PEC_tppPeca pPecaOrigem;
+		PEC_tppPeca pPecaDestino;
 		
 		if(posicaoInvalida(finalX, iFinalY, tabuleiro)){
 			return TAB_CondRetForaTabuleiro;
 		}
 		
-		if(!MoverPec(inicialX, iInicialY, finalX, iFinalY)){
-			return TAB_CondRetElementoNaoFaz;
-		}
+		pPecaOrigem = tabuleiro->posicoes[inicialX][InicialY];
 		
-		if((tabuleiro->posicoes[inicialX][iInicialY].pValor) == NULL){
+		if(pPecaOrigem == NULL){
 			return TAB_CondRetErro;
 		}
 		
-		if((tabuleiro->posicoes[finalX][iFinalY].pValor) != NULL){
-			if(ComparaElementos(tabuleiro->posicoes[inicialX][iInicialY].pValor,
-				tabuleiro->posicoes[finalX][iFinalY].pValor)){
+		if(!PEC_MoverPec(pPeca, inicialX, InicialY, finalX, FinalY)){
+			return TAB_CondRetElementoNaoFaz;
+		}
+		
+		pPecaDestino = tabuleiro->posicoes[finalX][FinalY];
+		
+		if(pPecaDestino != NULL){
+			if(ComparaElementos(pPecaOrigem, pPecaDestino)){
 				return TAB_CondRetElementoMesmoTime;
 			}
 			else{
+				if(!TAB_RetirarPeca(finalX, finalY, tabuleiro)){
+					return TAB_CondRetErro;
+				}
 				ret = TAB_CondRetSubstituiuOutroElemento;
 			}
 		}
 		else{
 			ret = TAB_CondRetOK;
 		}
-
-		if(!TAB_RetirarPeca(finalX, finalY, tabuleiro)){
-			return TAB_CondRetErro;
-		}
-		
-		tabuleiro->posicoes[finalX][iFinalY].pValor =  tabuleiro->posicoes[inicialX][iInicialY].pValor;
-		tabuleiro->posicoes[finalX][iFinalY].ameacados =  tabuleiro->posicoes[inicialX][iInicialY].ameacados;
-		tabuleiro->posicoes[finalX][iFinalY].ameacantes =  tabuleiro->posicoes[inicialX][iInicialY].ameacantes;
-		
-		tabuleiro->posicoes[inicialX][iInicialY].pValor = NULL;
-		tabuleiro->posicoes[inicialX][iInicialY].ameacados = NULL;
-		tabuleiro->posicoes[inicialX][iInicialY].ameacantes = NULL;
+				
+		tabuleiro->posicoes[finalX][FinalY] = pPecaOrigem;
+		tabuleiro->posicoes[inicialX][InicialY] = NULL;
 
 		return ret;
 	}/* Fim função: TAB  &Mover peca no tabuleiro */
@@ -201,28 +191,18 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *
 *  Função: TAB  &Retirar peca do tabuleiro
 *  ****/
- TAB_tpCondRet TAB_RetirarPeca(int inicialX, char inicialY, TAB_tppTabuleiro tabuleiro){
+ TAB_tpCondRet TAB_RetirarPeca(int inicialX, int inicialY, TAB_tppTabuleiro tabuleiro){
  
-		int iInicialY = converteColuna(inicialY);
-		
-		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		inicialX = inicialX -1;
- 
-		if(posicaoInvalida(inicialX, iInicialY, tabuleiro)){
+		if(posicaoInvalida(inicialX, InicialY, tabuleiro)){
 			return TAB_CondRetForaTabuleiro;
 		}
 		
-		if(tabuleiro->posicoes[inicialX][iInicialY].pValor == NULL){
+		if(tabuleiro->posicoes[inicialX][InicialY] == NULL){
 			return TAB_CondRetErro;
 		}
 		
-		tabuleiro->posicoes[inicialX][iInicialY].pValor = NULL;
-		LIS_DestruirLista(tabuleiro->posicoes[inicialX][iInicialY].ameacantes);
-		LIS_DestruirLista(tabuleiro->posicoes[inicialX][iInicialY].ameacados);
-		tabuleiro->posicoes[inicialX][iInicialY].ameacados = NULL;
-		tabuleiro->posicoes[inicialX][iInicialY].ameacantes = NULL;
-		
-		
+		tabuleiro->posicoes[inicialX][InicialY] = NULL;
+				
 		return TAB_CondRetOK;
 	}/* Fim função: TAB  &Retirar peca do tabuleiro */
    
@@ -231,21 +211,18 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *
 *  Função: TAB  &Obter peca do tabuleiro
 *  ****/
- TAB_tpCondRet TAB_ObterPeca(int inicialX, char inicialY, void** pValor,
+ TAB_tpCondRet TAB_ObterPeca(int inicialX, int inicialY, char** id,
 	TAB_tppTabuleiro tabuleiro){
 		
-		int iInicialY = converteColuna(inicialY);
-
-		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		inicialX = inicialX -1;
-		
-		if(posicaoInvalida(inicialX, iInicialY, tabuleiro)){
+		if(posicaoInvalida(inicialX, InicialY, tabuleiro)){
 			return TAB_CondRetForaTabuleiro;
 		}
 		
-		if(tabuleiro->posicoes[inicialX][iInicialY].pValor == NULL){
+		if(tabuleiro->posicoes[inicialX][iInicialY] == NULL){
 			return TAB_CondRetErro;
 		}
+		
+		(*id) = 
 		
 		(*pValor) = tabuleiro->posicoes[inicialX][iInicialY].pValor;
 		
@@ -349,23 +326,7 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		return TAB_CondRetOK;
 	}/* Fim função: TAB  -Validar posicao */
 	
-/***********************************************************************
-*
-*  $FC Função: TAB  -Converte coordenada da coluna
-*
-***********************************************************************/
-
-   int converteColuna(char coluna){
 	
-		int dist;
-		if ((coluna >= 'a') && (coluna <= 'z')){
-			dist = (coluna - 'a');
-		}
-		else{
-			dist = coluna - 'A';
-		}
-		return dist;
-	}/* Fim função: TAB  -Converte coordenada da coluna*/		
 
 /********** Fim do módulo de implementação: TAB  Tabuleiro de jogo generico **********/
 
