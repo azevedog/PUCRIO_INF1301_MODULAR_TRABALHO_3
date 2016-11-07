@@ -13,6 +13,8 @@
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
 *      1       gbha   5/NOV/2016 início desenvolvimento
+*      2       mcs   11/nov/2016 Continuação do desenvolvimento
+*
 *
 ***************************************************************************/
 
