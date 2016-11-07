@@ -107,6 +107,32 @@ typedef enum {
 ***********************************************************************/
 
    JOG_tpCondRet  JOG_InserirPeca(char idPeca, int colunaPeca, int linhaPeca,
-		int* TAB_MoverPeca);
+		int* TAB_MoverPeca (int iniX, int iniY, int fimX, int fimY);
 
+/***********************************************************************
+*
+*  $FC Função: JOG  &Procurar Peca
+*
+*  $ED Descrição da função
+*     Procurar uma peca no tabuleiro.
+*
+*  $EP Parâmetros
+*     idPeca  - identificador da peca.
+*
+*     timePeca  - time da peca.
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Se executou corretamente.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/
+
+   JOG_tpCondRet  JOG_InserirPeca(char idPeca, char timePeca);
+		
+
+		
+		
+		
+		
 
