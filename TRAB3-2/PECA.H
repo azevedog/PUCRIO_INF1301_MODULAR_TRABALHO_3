@@ -13,6 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*      3     gbha  13/Nov/2016 Ajustes para o T3
 *	  2       gbha   3/out/2016	conclusão desenvolvimento
 *     1       gbha   1/out/2016 início desenvolvimento
 *
@@ -69,6 +70,10 @@ typedef struct PEC_tagPeca* PEC_tppPeca ;
 *     este atributo é armazenado em um byte, permite 128 tipos
 *	  diferentes.
 *
+*	   corTime  - Caracter que identifica o time que esta peca
+*     pertence. Como este atributo é armazenado em um byte,
+*	   permite 128 tipos diferentes.
+*
 *     pathMovimento  - Caminho para executável que processa a validade
 *     do movimento da peca. Se respeita as regras da peca. NÃO
 *	  VALIDA SE O MOVIMENTO É OUT OF BOUNDS NO TABU
@@ -81,33 +86,9 @@ typedef struct PEC_tagPeca* PEC_tppPeca ;
 *     Não será dada mais informação quanto ao problema ocorrido.
 *
 ***********************************************************************/
-PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, 
+PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, char* corTime, 
 char* pathMovimento) ;
 
-
-/***********************************************************************
-*
-*  $FC Função: PEC  &DefinirCorPeca
-*
-*  $ED Descrição da função
-*     Atribui uma cor, que representa o time de uma dada peca.
-*
-*  $EP Parâmetros
-*     ppPeca  - Ponteiro de ponteiro para passagem da peca
-*     por referência.
-*
-*     corTime  - Caracter que identifica o time que esta peca
-*     pertence. Como este atributo é armazenado em um byte,
-*	   permite 128 tipos diferentes.
-*
-*  $FV Valor retornado
-*     Se executou corretamente retorna PEC_CondRetOK.
-*
-*     Se ocorreu algum erro, retorna PEC_CondRetERRO.
-*     Não será dada mais informação quanto ao problema ocorrido.
-*
-***********************************************************************/
-PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) ;
 
 /***********************************************************************
 *
@@ -117,7 +98,7 @@ PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) ;
 *     Recupera o nome do tipo da peca e o seu time.
 *
 *  $EP Parâmetros
-*     ppPeca  - Ponteiro de ponteiro para passagem da peca 
+*     pPeca  - Ponteiro da peca por valor.
 *     por referência.
 *
 *     id  - String de 3 caracteres <CaracterTipoPeca,CorTime> ex.: Peão do time preto
@@ -130,7 +111,7 @@ PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) ;
 *     Não será dada mais informação quanto ao problema ocorrido.
 *
 ***********************************************************************/
-PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca ppPeca, char** id);
+PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca pPeca, char** id);
 
 /***********************************************************************
 *

@@ -13,6 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*     3      gbha  13/Nov/2016 Ajustes para o T3
 *	  2       mcs	 2/out/2016 conclusão do desenvolvimento
 *     1       gbha   1/out/2016 início desenvolvimento
 ***************************************************************************/
@@ -55,7 +56,7 @@ typedef struct PEC_tagPeca {
 *
 *  Função: PEC  &Criar peca
 *  ****/
-PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, 
+PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador,  char* corTime,
 char* pathMovimento) {
 
 	(*ppPeca) = (PEC_tpPeca*) malloc( sizeof( PEC_tpPeca)) ;
@@ -66,6 +67,7 @@ char* pathMovimento) {
 	LimparPeca((*ppPeca));
 	
 	(*ppPeca)->identificadorTipo = *identificador;
+	(*ppPeca)->corTime = *corTime;
 	(*ppPeca)->pathMovimento = pathMovimento;
 	
 	return PEC_CondRetOK;
@@ -75,25 +77,11 @@ char* pathMovimento) {
 
 /***************************************************************************
 *
-*  Função: PEC  &DefinirCorPeca
-*  ****/
-PEC_tpCondRet PEC_DefinirCorPeca(PEC_tppPeca ppPeca, char* corTime) {
-
-	if(ppPeca == NULL){
-		return PEC_CondRetERRO;
-	}
-	
-	ppPeca->corTime = *corTime;
-	return PEC_CondRetOK;
-}/* Fim função: PEC  &DefinirCorPeca */
-
-/***************************************************************************
-*
 *  Função: PEC  &ObterIdentificarPeca
 *  ****/
-PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca ppPeca, char** id) {
+PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca pPeca, char** id) {
 
-	if(ppPeca == NULL){
+	if(pPeca == NULL){
 		return PEC_CondRetERRO;
 	}
 	
@@ -101,10 +89,9 @@ PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca ppPeca, char** id) {
 			return PEC_CondRetERRO;
 	}
 	
-	stpcpy((*id),  pPeca->identificadorTipo);
-	strcat((*id), pPeca->corTime);
+	strcpy((*id),  &(pPeca->identificadorTipo));
+	strcat((*id), &(pPeca->corTime));
 	
-	ppPeca->corTime = *corTime;
 	return PEC_CondRetOK;
 }/* Fim função: PEC  &ObterIdentificarPeca */
 
@@ -121,15 +108,14 @@ PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int final
 		return PEC_CondRetERRO;
 	}
 	
-	iX = '0' + inicialX;
-	iY = '0' + inicialY;
-	fX = '0' + finalX;
-	fY = '0' + finalY;
+	iX = '0' + ((unsigned char) inicialX);
+	iY = '0' + ((unsigned char) inicialY);
+	fX = '0' + ((unsigned char) finalX);
+	fY = '0' + ((unsigned char) finalY);
 	
 	ret = _spawnl(P_WAIT, pPeca->pathMovimento,  pPeca->pathMovimento, &iX, &iY, &fX, &fY, NULL);
 	
-	
-	if(ret > 0)
+	if(ret == 0)
 	{
 		return PEC_CondRetOK;
 	} else
@@ -148,6 +134,7 @@ PEC_tpCondRet PEC_LiberarPeca(PEC_tppPeca pPeca){
 	if(pPeca == NULL){
 		return PEC_CondRetERRO;
 	}
+	free(pPeca->pathMovimento);
 	free(pPeca) ;
 	return PEC_CondRetOK;
 } /* Fim função: PEC  &LiberarPeca */
