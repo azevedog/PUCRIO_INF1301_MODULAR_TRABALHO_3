@@ -30,7 +30,6 @@
 
 #include "LISTA.h"
 #include "TABULEIRO.h"
-#include "PECA.h"
 
 /***** Declarações exportadas pelo módulo *****/
 

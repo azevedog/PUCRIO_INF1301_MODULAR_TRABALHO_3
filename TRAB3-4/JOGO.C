@@ -25,7 +25,6 @@
 #include   <assert.h>
 #include	"TABULEIRO.h"
 #include	"LISTA.h"
-#include	"PECA.h"
 
 /***********************************************************************
 *
