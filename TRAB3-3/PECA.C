@@ -114,8 +114,6 @@ PEC_tpCondRet PEC_Mover(PEC_tppPeca pPeca, int inicialX, int inicialY, int final
 	
 	ret = _spawnl(P_WAIT, pPeca->pathMovimento,  pPeca->pathMovimento, &iX, &iY, &fX, &fY, NULL);
 	
-	 printf("\n\nTeste\n");
-	 printf("Teste - Ret: %d\n\n", ret);
 	if(ret == 0)
 	{
 		return PEC_CondRetOK;

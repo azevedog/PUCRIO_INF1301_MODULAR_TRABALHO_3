@@ -5,7 +5,7 @@
 
 int main (int argc, char** argv){
 	int inicialX,  inicialY,  finalX,  finalY;
-	//printf("Movimentando Bispo, num args: %d\n", argc);
+	//printf("Movimentando Peao, num args: %d\n", argc);
 	
 	if(argc<5) return 0;
 
@@ -18,12 +18,13 @@ int main (int argc, char** argv){
 	finalY = *(argv[4]) - '0';
 	//printf("finalY: %c -> %d\n", *(argv[4]), finalY);
 	
-	if(pow((inicialX-finalX), 2) == pow((inicialY - finalY),2)){
-		//printf("Resultado: Ok\n");
-		return 0;
+	if((inicialY >= finalY) || (pow((inicialX-finalX), 2)>1) || (pow((inicialY - finalY),2) > 1)){
+		printf("Resultado: ERRO\n");
+		return 1;	
 	}
 	
-	//printf("Resultado: ERRO\n");
-	return 1;
+	printf("Resultado: Ok\n");
+	return 0;
+	
 
 }

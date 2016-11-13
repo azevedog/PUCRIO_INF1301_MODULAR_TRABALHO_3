@@ -1,0 +1,20 @@
+# Composicao do programa de teste de uma peca genérica
+# Este exemplo utiliza o arcabouço completo 
+
+[Diretorios]
+
+Nome        =  Peao
+PathDefault =  .
+err         =  .
+
+[Modulos]
+Peao
+
+[BuildInicio]
+/OUT:Peao.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+
+[Fim]

@@ -156,10 +156,7 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
                return TST_CondRetParm ;
             } /* if */
 
-            CondRet = PEC_Mover(vtPecas[inxPeca], iniX, iniY, fimX, fimY) ;
-			
-			 printf("TesteImpl\n");
-	 printf("TesteImpl - CondRet: %d\n\n", CondRet);
+            CondRet = PEC_Mover(vtPecas[inxPeca], iniX, iniY, fimX, fimY);
 
             return TST_CompararInt( CondRetEsp ,CondRet ,
                "Erro ao mover a peca.") ;
