@@ -17,37 +17,35 @@
 =declararparm   cor0	string	"b"
 =declararparm	cor1 	string	"p"
 
+=declararparm   Torre string "Torre.exe"
+=declararparm   Rei string "Rei.exe"
+
 =declararparm   OK      int  0
 =declararparm   Erro    int  1
 =declararparm   TimeDif int  2
 =declararparm   TimeIgual int 3
 
-== Criar a peça 0 "Peao"
-=criarpeca  inx0  id0  OK
+== Criar a peça 0 "Rei"
+=criarpeca  inx0  id0 cor1 Rei OK
 
-== Definir cor  peça 0 "Peao"
-=corpeca  inx0  cor1  OK
 
-== Definir movimento para o peao
+== Definir movimento para o rei
 =moverpeca  inx0  0 0 1 0  OK
 
-== Criar a peca 1 "Cavalo"
-=criarpeca  inx1  id1 OK
+== Definir movimento ERRADO para o rei
+=moverpeca  inx0  1 0 2 3  Erro
 
-== Definir cor  peca 1 "Cavalo"
-=corpeca  inx1  cor0  OK
+== Criar a peca 1 "Torre"
+=criarpeca  inx1  id1 cor0 Torre OK
 
-== Definir movimento para o cavalo
+== Definir movimento para a torre
 =moverpeca  inx1 0 0 0 1 OK
 
-== Definir movimento ERRADO para o cavalo
+== Definir movimento ERRADO para a torre
 =moverpeca  inx1 0 1 1 2 Erro
 
 == Criar a peca 2 "Unicornio"
-=criarpeca inx2	id2 OK
-
-== Definir cor  peca 2 "Unicornio"
-=corpeca  inx2  cor0  OK
+=criarpeca inx2	id2 cor0 Torre OK
 
 == Comparar peca 1 e 2 de times iguais
 =compararpeca inx1 inx2 TimeIgual

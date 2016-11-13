@@ -88,35 +88,14 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
       /* Testar criar peca */
 		if ( strcmp( ComandoTeste , CRIAR_PECA_CMD ) == 0 )
          {
-
-            numLidos = LER_LerParametros( "isi" ,
-                       &inxPeca, &tipoPeca, &CondRetEsp) ;
-
-            if ( ( numLidos != 3 )
-              || ( !ValidarInxPeca( inxPeca )))
-            {
-               return TST_CondRetParm ;
-            } /* if */
+			char fileName [100];
+			char* pFilePath;
+			char* pathPrefix = ".\\Movimento\\"; 
 			
-			pTipoPeca = (char*) malloc(sizeof(char));
-			strcpy(pTipoPeca, &tipoPeca);
+            numLidos = LER_LerParametros( "isssi" ,
+                       &inxPeca, &tipoPeca,&corPeca, &fileName, &CondRetEsp) ;
 
-            CondRet =
-                 PEC_CriarPeca(&(vtPecas[inxPeca]), pTipoPeca,  ".\\Movimento\\Torre.exe") ;
-				 
-            return TST_CompararInt(CondRetEsp, CondRet,
-               "Erro ao criar peca.") ;
-
-        } /* fim ativa: Testar CriarPeca */
-
-		      /* Testar definir cor */
-		else if ( strcmp( ComandoTeste , DEF_COR_PECA_CMD ) == 0 )
-         {
-
-            numLidos = LER_LerParametros( "isi" ,
-                       &inxPeca, &corPeca, &CondRetEsp) ;
-
-            if ( ( numLidos != 3 )
+            if ( ( numLidos != 5 )
               || ( !ValidarInxPeca( inxPeca )))
             {
                return TST_CondRetParm ;
@@ -124,14 +103,21 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
 			
 			pCorPeca = (char*) malloc(sizeof(char));
 			strcpy(pCorPeca, &corPeca);
-
+			
+			pTipoPeca = (char*) malloc(sizeof(char));
+			strcpy(pTipoPeca, &tipoPeca);
+			
+			pFilePath = (char*) malloc(strlen(pathPrefix)+strlen(fileName)+1);
+			strcpy(pFilePath, pathPrefix);
+			strcat(pFilePath, fileName);
+			  
             CondRet =
-                 PEC_DefinirCorPeca(vtPecas[inxPeca], pCorPeca) ;
+                 PEC_CriarPeca(&(vtPecas[inxPeca]), pTipoPeca, pCorPeca, pFilePath) ;
 				 
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao criar peca.") ;
 
-        } /* fim ativa: Testar definir cor */
+        } /* fim ativa: Testar CriarPeca */
 
       /* Testar Esvaziar Liberar Peca */
         else if ( strcmp(ComandoTeste, LIBERAR_PECA_CMD) == 0 ){
@@ -171,6 +157,9 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
             } /* if */
 
             CondRet = PEC_Mover(vtPecas[inxPeca], iniX, iniY, fimX, fimY) ;
+			
+			 printf("TesteImpl\n");
+	 printf("TesteImpl - CondRet: %d\n\n", CondRet);
 
             return TST_CompararInt( CondRetEsp ,CondRet ,
                "Erro ao mover a peca.") ;

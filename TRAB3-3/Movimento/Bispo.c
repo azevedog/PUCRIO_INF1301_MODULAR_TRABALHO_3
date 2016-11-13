@@ -1,10 +1,11 @@
 
 #include <stdio.h>
+#include <math.h>
 
 
 int main (int argc, char** argv){
 	int inicialX,  inicialY,  finalX,  finalY;
-	printf("Movimentando torre, num args: %d\n", argc);
+	printf("Movimentando Bispo, num args: %d\n", argc);
 	
 	if(argc<5) return 0;
 
@@ -17,10 +18,12 @@ int main (int argc, char** argv){
 	finalY = *(argv[4]) - '0';
 	printf("finalY: %c -> %d\n", *(argv[4]), finalY);
 	
-	if((inicialX != finalX) && (inicialY != finalY)){
-		printf("Resultado: ERRO\n");
-		return 1;
+	if(pow((inicialX-finalX), 2) == pow((inicialY - finalY),2)){
+		printf("Resultado: Ok\n");
+		return 0;
 	}
-	printf("Resultado: Ok\n");
-	return 0;
+	
+	printf("Resultado: ERRO\n");
+	return 1;
+
 }

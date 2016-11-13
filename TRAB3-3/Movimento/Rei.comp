@@ -1,0 +1,20 @@
+# Composicao do programa de teste de uma peca genérica
+# Este exemplo utiliza o arcabouço completo 
+
+[Diretorios]
+
+Nome        =  Rei
+PathDefault =  .
+err         =  .
+
+[Modulos]
+rei
+
+[BuildInicio]
+/OUT:Rei.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+
+[Fim]
