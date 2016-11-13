@@ -63,10 +63,10 @@
 =obterpeca col0 lin0 OK
 
 == Inserir peça branca na posição D8
-=inserirpeca col3 lin7 Peao cor0 PeaoPath OK
+=inserirpeca col6 lin7 Peao cor0 PeaoPath OK
 
 == Obter peça da posição D8
-=obterpeca col3 lin7 OK
+=obterpeca col6 lin7 OK
 
 == Testar obter peça de localização vazia no tabuleiro
 =obterpeca col7 lin7 Erro
