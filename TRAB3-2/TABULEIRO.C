@@ -163,7 +163,6 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 			}
 		}
 		else{
-			printf("\n\n!=Null X: %d Y: %d\n\n", finalX, finalY);
 			ret = TAB_CondRetOK;
 		}
 				

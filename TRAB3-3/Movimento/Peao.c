@@ -19,11 +19,11 @@ int main (int argc, char** argv){
 	//printf("finalY: %c -> %d\n", *(argv[4]), finalY);
 	
 	if((inicialY >= finalY) || (pow((inicialX-finalX), 2)>1) || (pow((inicialY - finalY),2) > 1)){
-		printf("Resultado: ERRO\n");
+		//printf("Resultado: ERRO\n");
 		return 1;	
 	}
 	
-	printf("Resultado: Ok\n");
+	//printf("Resultado: Ok\n");
 	return 0;
 	
 
