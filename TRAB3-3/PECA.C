@@ -79,7 +79,7 @@ char* pathMovimento) {
 *
 *  Função: PEC  &ObterIdentificarPeca
 *  ****/
-PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca pPeca, char** id) {
+PEC_tpCondRet PEC_ObterIdentificadorPeca(PEC_tppPeca pPeca, char** id) {
 
 	if(pPeca == NULL){
 		return PEC_CondRetERRO;
@@ -90,6 +90,7 @@ PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca pPeca, char** id) {
 	}
 	
 	strcpy((*id),  &(pPeca->identificadorTipo));
+	strcat((*id), ",");
 	strcat((*id), &(pPeca->corTime));
 	
 	return PEC_CondRetOK;

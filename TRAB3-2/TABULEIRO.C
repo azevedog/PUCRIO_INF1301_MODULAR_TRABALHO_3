@@ -212,7 +212,7 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		
 		pPeca = tabuleiro->posicoes[inicialX][inicialY];
 		
-		if(!PEC_ObterIdentificarPeca(pPeca, id)){
+		if(PEC_ObterIdentificadorPeca(pPeca, id) != PEC_CondRetOK){
 				return TAB_CondRetErro;
 		}
 		return TAB_CondRetOK;

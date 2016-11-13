@@ -111,7 +111,7 @@ char* pathMovimento) ;
 *     Não será dada mais informação quanto ao problema ocorrido.
 *
 ***********************************************************************/
-PEC_tpCondRet PEC_ObterIdentificarPeca(PEC_tppPeca pPeca, char** id);
+PEC_tpCondRet PEC_ObterIdentificadorPeca(PEC_tppPeca pPeca, char** id);
 
 /***********************************************************************
 *
