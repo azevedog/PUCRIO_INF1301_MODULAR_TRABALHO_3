@@ -53,16 +53,10 @@ static const char DESTRUIR_TABULEIRO_CMD      [ ] = "=destruirtabuleiro"  ;
 #define DIM_VALOR     100
   
 TAB_tppTabuleiro tab = NULL;
-PEC_tppPeca pPeca = NULL;
 LIS_tppLista pLista = NULL;
 
 
 /***** Protótipos das funções encapuladas no módulo *****/
-
-   static int Mover( int inicialX, int inicialY, int finalX, int finalY);
-		/* Essa funcao é de peca, mas enquanto nao existe um modulo jogo
-		que use essa condicao de criar a peca e inserir de fora, o teste do 
-		tabuleiro deve exercer essa funcao (simular minimamente um jogo)*/
 		
 	static void ExcluirValor ( void * pDado );
 		/* Essa funcao é de lista, mas enquanto nao existe um modulo jogo
@@ -103,22 +97,17 @@ LIS_tppLista pLista = NULL;
    {
    
 	  int x;
-	  char y;
-	  int fX = -1;
+	  int y;
 	  
       int numLidos   = -1 ,
           CondRetEsp = -1,
 		  CondRet = -1;
 
-      //char   StringDado[  DIM_VALOR ] ;
-      //char * pDado ;
-
        /* Testar Criar tabuleiro */
          if  ( strcmp( ComandoTeste , CRIAR_TAB_CMD) == 0 )
          {
-			int numCol;
 
-            numLidos = LER_LerParametros( "iii" , &numCol, &x,
+            numLidos = LER_LerParametros( "iii" , &y, &x,
                        &CondRetEsp ) ;
 
             if (numLidos != 3){
@@ -127,7 +116,7 @@ LIS_tppLista pLista = NULL;
 			
 			tab = *((TAB_tppTabuleiro*) malloc(sizeof(TAB_tppTabuleiro)));
 			
-			CondRet = TAB_CriarTabuleiro(numCol, x, &tab);
+			CondRet = TAB_CriarTabuleiro(y, x, &tab);
 			
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao criar tabuleiro.") ;
@@ -136,23 +125,25 @@ LIS_tppLista pLista = NULL;
 		  /* Testar Inserir peca */
         else if  ( strcmp( ComandoTeste , INSERIR_PECA_CMD) == 0 ){
 
-			char identificador = 'T';
+			char identificador;
 			char corTime;
+			char fileName [100];
+			char* pFilePath;
+			char* pathPrefix = ".\\Movimento\\"; 
 			
-            numLidos = LER_LerParametros( "issi" , &x, &y, &corTime,
-                       &CondRetEsp ) ;
+            numLidos = LER_LerParametros( "iisssi" , &x, &y, &identificador, &corTime,
+                       &fileName, &CondRetEsp ) ;
 
-					   
-            if (numLidos != 4){
+            if (numLidos != 6){
                return TST_CondRetParm ;
             } /* if */
 			
+			pFilePath = (char*) malloc(strlen(pathPrefix)+strlen(fileName)+1);
+			strcpy(pFilePath, pathPrefix);
+			strcat(pFilePath, fileName);
 			
-			if(PEC_CriarPeca(&pPeca, &identificador, &corTime, Mover)){
-				CondRet = TAB_CondRetErro;
-			}
-			
-            CondRet = TAB_InserirPeca(x, y, pPeca, tab, ExcluirValor);
+            CondRet = TAB_InserirPeca(x, y, &identificador, &corTime, 
+			pFilePath, tab);   
 
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao inserir peca.") ;
@@ -162,17 +153,17 @@ LIS_tppLista pLista = NULL;
         else if  ( strcmp( ComandoTeste , MOVER_PECA_CMD) == 0 ){
 
 			
-			char finalY;
+			int finalY;
+			int finalX;
 			
-            numLidos = LER_LerParametros( "isisi" , &x, &y, &fX, &finalY,
+            numLidos = LER_LerParametros( "iiiii" , &x, &y, &finalX, &finalY,
                        &CondRetEsp) ;
 
             if (numLidos != 5){
                return TST_CondRetParm ;
             } /* if */
 
-			CondRet = TAB_MoverPeca(x, y, fX, finalY, Mover, tab,
-			Compara);
+			CondRet = TAB_MoverPeca(x, y, finalX, finalY, tab);
 
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao mover peca.") ;
@@ -181,7 +172,7 @@ LIS_tppLista pLista = NULL;
 		/* Testar Retirar peca */
         else if  ( strcmp( ComandoTeste , RETIRAR_PECA_CMD) == 0 ){
 
-            numLidos = LER_LerParametros( "isi" , &x, &y,
+            numLidos = LER_LerParametros( "iii" , &x, &y,
                        &CondRetEsp ) ;
 
             if (numLidos != 3){
@@ -196,26 +187,30 @@ LIS_tppLista pLista = NULL;
 		
 		/* Testar Obter peca */
         else if  ( strcmp(ComandoTeste , OBTER_PECA_CMD) == 0 ){
+			
+			char* id;
 
-            numLidos = LER_LerParametros( "isi" , &x, &y,
+            numLidos = LER_LerParametros( "iii" , &x, &y,
                        &CondRetEsp ) ;
 
             if (numLidos != 3){
                return TST_CondRetParm ;
             } /* if */
 			
-			pPeca  = *((PEC_tppPeca*) malloc(sizeof(PEC_tppPeca)));
-			CondRet = TAB_ObterPeca(x, y, &pPeca, tab); 
+			id = (char*) malloc(sizeof(char)*200);
+			
+			CondRet = TAB_ObterPeca(x, y, &id, tab); 
 			
             if(CondRet == TAB_CondRetOK){
-				if(pPeca == NULL){
+				if(strlen(id) == 0){
 					CondRet = TAB_CondRetErro;
 				}
 				else{
 					CondRet = TAB_CondRetOK;
 				}
 			}
-
+			
+			free(id);
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao obter peca.") ;
         } /* fim ativa: Testar Obeter peca */
@@ -223,7 +218,7 @@ LIS_tppLista pLista = NULL;
 		/* Testar Obter ameacados */
         else if  ( strcmp( ComandoTeste , OBTER_CADOS_CMD) == 0 ){
 
-            numLidos = LER_LerParametros( "isi" , &x, &y,
+            numLidos = LER_LerParametros( "iii" , &x, &y,
                        &CondRetEsp ) ;
 
             if (numLidos != 3){
@@ -249,7 +244,7 @@ LIS_tppLista pLista = NULL;
 		/* Testar Obter ameacantes */
         else if  ( strcmp( ComandoTeste , OBTER_CANTES_CMD) == 0 ){
 
-            numLidos = LER_LerParametros( "isi" , &x, &y,
+            numLidos = LER_LerParametros( "iii" , &x, &y,
                        &CondRetEsp ) ;
 
             if (numLidos != 3){
@@ -294,22 +289,6 @@ LIS_tppLista pLista = NULL;
       
 
 /*****  Código das funções encapsuladas no módulo  *****/
-
-
-/***********************************************************************
-*
-*  $FC Função: TTAB -Mover (teste hardcoded para torre xadrez)
-*
-***********************************************************************/
-
-   int Mover( int inicialX, int inicialY, int finalX, int finalY)
-   {
-		if((inicialX != finalX) && (inicialY != finalY)){
-			return 0;
-		}
-		return 1;
-   } /* Fim função: TTAB -Mover */
-   
    
 /***********************************************************************
 *

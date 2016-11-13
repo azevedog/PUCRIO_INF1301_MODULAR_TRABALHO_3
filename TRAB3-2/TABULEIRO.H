@@ -117,6 +117,10 @@ typedef enum {
 *     este atributo é armazenado em um byte, permite 128 tipos
 *	  diferentes.
 *
+*	   corTime  - Caracter que identifica o time que esta peca
+*     pertence. Como este atributo é armazenado em um byte,
+*	   permite 128 tipos diferentes.
+*
 *     pathMovimento  - Caminho para executável que processa a validade
 *     do movimento da peca. Se respeita as regras da peca. NÃO
 *	  VALIDA SE O MOVIMENTO É OUT OF BOUNDS NO TABU
@@ -137,7 +141,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	TAB_tpCondRet TAB_InserirPeca(int linha, char coluna,  char* identificador,
+	TAB_tpCondRet TAB_InserirPeca(int linha, int coluna,  char* identificador, char* corTime, 
 			char* pathMovimento, TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************
@@ -206,7 +210,7 @@ typedef enum {
 *
 *     inicialY  - Coordenada vertical da posicao da peca
 *
-*     pValor  - Ponteiro para elemento na posicao, passado por referencia.
+*     id  - Identificador e time da peca, passado por referencia.
 *
 *     tabuleiro  - Ponteiro o tabuleiro que terá a peca inserida
 *
@@ -218,7 +222,7 @@ typedef enum {
 *
 ***********************************************************************/
 
- TAB_tpCondRet TAB_ObterPeca(int inicialX, char inicialY, void** pValor,
+ TAB_tpCondRet TAB_ObterPeca(int inicialX, int inicialY, char** id,
 	TAB_tppTabuleiro tabuleiro);
 	
 /***********************************************************************
@@ -245,7 +249,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	TAB_tpCondRet TAB_ObterListaAmeacantes(int inicialX, char inicialY, LIS_tppLista* lista,
+	TAB_tpCondRet TAB_ObterListaAmeacantes(int inicialX, int inicialY, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro);
 	
 /***********************************************************************
@@ -273,7 +277,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	TAB_tpCondRet TAB_ObterListaAmeacados(int inicialX, char inicialY, LIS_tppLista* lista,
+	TAB_tpCondRet TAB_ObterListaAmeacados(int inicialX, int inicialY, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************
