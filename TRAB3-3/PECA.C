@@ -13,8 +13,9 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*		4		gbha		14/nov/2016 Conlusao desenvolvimento T3
 *     3      gbha  13/Nov/2016 Ajustes para o T3
-*	  2       mcs	 2/out/2016 conclusão do desenvolvimento
+*	  2       mcs	 2/out/2016 conclusão do desenvolvimento T2
 *     1       gbha   1/out/2016 início desenvolvimento
 ***************************************************************************/
 

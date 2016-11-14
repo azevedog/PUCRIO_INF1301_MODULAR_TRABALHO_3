@@ -29,7 +29,6 @@
 ***************************************************************************/
 
 #include "LISTA.h"
-#include "TABULEIRO.h"
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -69,9 +68,6 @@ typedef enum {
 *
 *     numLinhas  - Número de linhas do tabuleiro.
 *
-*     novoTabuleiro  - Ponteiro para o endereço de tabuleiro, para passagem do retorno
-*		por referencia.
-*
 *  $FV Valor retornado
 *     JOG_CondRetOK - Se executou corretamente.
 *     JOG_CondRetErro - Caso contrário.
@@ -79,8 +75,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   JOG_tpCondRet  JOG_CriarTabuleiro(int numColunas, int numLinhas,
-		TAB_tppTabuleiro* novoTabuleiro);
+   JOG_tpCondRet  JOG_CriarTabuleiro(int numColunas, int numLinhas);
 		
 /***********************************************************************
 *
@@ -126,12 +121,30 @@ typedef enum {
 * 
 *
 ***********************************************************************/
+	JOG_tpCondRet  JOG_PocurarPeca(char idPeca, char timePeca);
+   
+   
+/***********************************************************************
+*
+*  $FC Função: JOG  &Procurar Peca
+*
+*  $ED Descrição da função
+*     Procurar uma peca no tabuleiro.
+*
+*  $EP Parâmetros
+*     idPeca  - identificador da peca.
+*
+*     timePeca  - time da peca.
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Se executou corretamente.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/  
+   JOG_tpCondRet JOG_ImprimirTabuleiro();
 
-   JOG_tpCondRet  JOG_InserirPeca(char idPeca, char timePeca);
-		
 
-		
-		
-		
+/********** Fim do módulo de definição: JOG Jogo generico de tabuleiro **********/
 		
 
