@@ -125,24 +125,24 @@ LIS_tppLista pLista = NULL;
 		  /* Testar Inserir peca */
         else if  ( strcmp( ComandoTeste , INSERIR_PECA_CMD) == 0 ){
 
-			char identificador;
 			char corTime;
+			char id;
 			char fileName [100];
 			char* pFilePath;
 			char* pathPrefix = ".\\Movimento\\"; 
 			
-            numLidos = LER_LerParametros( "iisssi" , &x, &y, &identificador, &corTime,
+            numLidos = LER_LerParametros( "iisssi", &x, &y, &corTime, &id,
                        &fileName, &CondRetEsp ) ;
 
             if (numLidos != 6){
                return TST_CondRetParm ;
             } /* if */
-			
+		
 			pFilePath = (char*) malloc(strlen(pathPrefix)+strlen(fileName)+1);
 			strcpy(pFilePath, pathPrefix);
 			strcat(pFilePath, fileName);
 			
-            CondRet = TAB_InserirPeca(x, y, &identificador, &corTime, 
+            CondRet = TAB_InserirPeca(x, y, id, corTime, 
 			pFilePath, tab);   
 
             return TST_CompararInt(CondRetEsp, CondRet,
@@ -198,7 +198,6 @@ LIS_tppLista pLista = NULL;
             } /* if */
 			
 			id = (char*) malloc(sizeof(char)*200);
-			
 			CondRet = TAB_ObterPeca(x, y, &id, tab); 
 			
             if(CondRet == TAB_CondRetOK){

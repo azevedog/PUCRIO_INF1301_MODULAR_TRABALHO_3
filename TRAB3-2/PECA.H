@@ -86,7 +86,7 @@ typedef struct PEC_tagPeca* PEC_tppPeca ;
 *     Não será dada mais informação quanto ao problema ocorrido.
 *
 ***********************************************************************/
-PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador, char* corTime, 
+PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char identificador, char corTime, 
 char* pathMovimento) ;
 
 

@@ -141,7 +141,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	TAB_tpCondRet TAB_InserirPeca(int linha, int coluna,  char* identificador, char* corTime, 
+	TAB_tpCondRet TAB_InserirPeca(int linha, int coluna,  char identificador, char corTime, 
 			char* pathMovimento, TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************
@@ -152,13 +152,13 @@ typedef enum {
 *     Move uma peca no tabuleiro genérico para jogos.
 *
 *  $EP Parâmetros
-*     inicialX  - Coordenada horizontal da posicao inicial da peca
+*     linhaInicial  - Coordenada horizontal da posicao inicial da peca
 *
-*     inicialY  - Coordenada vertical da posicao inicial da peca
+*     colunaInicial  - Coordenada vertical da posicao inicial da peca
 *
-*     finalX  - Coordenada horizontal da posicao final da peca
+*     linhaFinal  - Coordenada horizontal da posicao final da peca
 *
-*     finalY  - Coordenada vertical da posicao final da peca
+*     colunaFinal  - Coordenada vertical da posicao final da peca
 *
 *     tabuleiro  - Ponteiro o tabuleiro que terá a peca inserida
 *
@@ -172,7 +172,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   TAB_tpCondRet TAB_MoverPeca(int inicialX, int inicialY, int finalX, int finalY, TAB_tppTabuleiro tabuleiro);
+   TAB_tpCondRet TAB_MoverPeca(int linhaInicial, int colunaInicial, int linhaFinal, int colunaFinal, TAB_tppTabuleiro tabuleiro);
    
 /***********************************************************************
 *
@@ -182,9 +182,9 @@ typedef enum {
 *     Retira uma peca no tabuleiro genérico para jogos.
 *
 *  $EP Parâmetros
-*     inicialX  - Coordenada horizontal da posicao da peca
+*     linhaInicial  - Coordenada horizontal da posicao da peca
 *
-*     inicialY  - Coordenada vertical da posicao  da peca
+*     colunaInicial  - Coordenada vertical da posicao  da peca
 *
 *     tabuleiro  - Ponteiro o tabuleiro que terá a peca inserida
 *
@@ -196,7 +196,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-   TAB_tpCondRet TAB_RetirarPeca(int inicialX, int inicialY, TAB_tppTabuleiro tabuleiro);
+   TAB_tpCondRet TAB_RetirarPeca(int linhaInicial, int colunaInicial, TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************
 *
@@ -206,9 +206,9 @@ typedef enum {
 *     Obtem uma peca no tabuleiro genérico para jogos.
 *
 *  $EP Parâmetros
-*     inicialX  - Coordenada horizontal da posicao da peca
+*     linhaInicial  - Coordenada horizontal da posicao da peca
 *
-*     inicialY  - Coordenada vertical da posicao da peca
+*     colunaInicial  - Coordenada vertical da posicao da peca
 *
 *     id  - Identificador e time da peca, passado por referencia.
 *
@@ -222,7 +222,7 @@ typedef enum {
 *
 ***********************************************************************/
 
- TAB_tpCondRet TAB_ObterPeca(int inicialX, int inicialY, char** id,
+ TAB_tpCondRet TAB_ObterPeca(int linhaInicial, int colunaInicial, char** id,
 	TAB_tppTabuleiro tabuleiro);
 	
 /***********************************************************************
@@ -233,9 +233,9 @@ typedef enum {
 *     Obtem a cabeca da lista de ameacantes.
 *
 *  $EP Parâmetros
-*     inicialX  - Coordenada horizontal da posicao da peca
+*     linhaInicial  - Coordenada horizontal da posicao da peca
 *
-*     inicialY  - Coordenada vertical da posicao  da peca
+*     colunaInicial  - Coordenada vertical da posicao  da peca
 *
 *     lista  - Ponteirto para o cabecalho da lista (retornado por referencia).
 *
@@ -249,7 +249,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	TAB_tpCondRet TAB_ObterListaAmeacantes(int inicialX, int inicialY, LIS_tppLista* lista,
+	TAB_tpCondRet TAB_ObterListaAmeacantes(int linhaInicial, int colunaInicial, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro);
 	
 /***********************************************************************
@@ -260,9 +260,9 @@ typedef enum {
 *     Obtem a cabeca da lista de ameacados.
 *
 *  $EP Parâmetros
-*     inicialX  - Coordenada horizontal da posicao da peca
+*     linhaInicial  - Coordenada horizontal da posicao da peca
 *
-*     inicialY  - Coordenada vertical da posicao  da peca
+*     colunaInicial  - Coordenada vertical da posicao  da peca
 *
 *     lista  - Ponteirto para o cabecalho da lista (retornado por referencia).
 *
@@ -277,7 +277,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-	TAB_tpCondRet TAB_ObterListaAmeacados(int inicialX, int inicialY, LIS_tppLista* lista,
+	TAB_tpCondRet TAB_ObterListaAmeacados(int linhaInicial, int colunaInicial, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro);
 
 /***********************************************************************

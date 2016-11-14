@@ -47,91 +47,94 @@
 =criartabuleiro 8  8 OK
 
 == Inserir peça branca no tabuleiro na posição B6
-=inserirpeca col1 lin5 Peao cor0 PeaoPath OK
-=obterpeca col1 lin5  OK
+=inserirpeca lin5 col1 cor0 Peao PeaoPath OK
+
+=obterpeca lin5 col1 OK
 
 == Testar inserir peça em posição B6 ocupada do tabuleiro 
-=inserirpeca col1 lin5 Torre cor1 TorrePath Erro
-=obterpeca col1 lin5 OK
+=inserirpeca lin5 col1 cor1 Torre TorrePath Erro
+=obterpeca lin5 col1 OK
 
 == Inserir peça preta na posição C6
-=inserirpeca col2 lin6 Rei cor1 ReiPath OK
-=obterpeca col2 lin6 OK
+=inserirpeca lin6 col2 cor1 Rei ReiPath OK
+=obterpeca lin6 col2 OK
 
 == Inserir peça preta na posição A1
-=inserirpeca col0 lin0 Torre cor1 TorrePath OK
-=obterpeca col0 lin0 OK
+=inserirpeca lin0 col0 cor1 Torre TorrePath OK
+=obterpeca lin0 col0 OK
 
 == Inserir peça branca na posição D8
-=inserirpeca col6 lin7 Peao cor0 PeaoPath OK
+=inserirpeca lin7 col6 cor0 Peao PeaoPath OK
 
 == Obter peça da posição D8
-=obterpeca col6 lin7 OK
+=obterpeca lin7 col6 OK
 
 == Testar obter peça de localização vazia no tabuleiro
-=obterpeca col7 lin7 Erro
+=obterpeca lin7 col7 Erro
 
 == Inserir peça preta em local inexistente
-=inserirpeca 9 15 Rei cor1 ReiPath ForaTabuleiro
+=inserirpeca 9 15 cor1 Rei ReiPath ForaTabuleiro
 
 == Realizar movimento inadequado com peça
-=moverpeca col0 lin0 col1 lin1 ElemNaoFaz
+=moverpeca lin0 col0 lin1 col1 ElemNaoFaz
 
 == Mover peça da posição B2 para fora do tabuleiro
-=moverpeca col1 lin1 9 9 ForaTabuleiro
+=moverpeca lin1 col1 9 9 ForaTabuleiro
 
 == Mover peça da posição A1 para C1
-=moverpeca col0 lin0 col2 lin0 OK
-=obterpeca col2 lin0 OK
-=obterpeca col0 lin0 Erro
+=moverpeca lin0 col0 lin0 col2 OK
+=obterpeca lin0 col2 OK
+=obterpeca lin0 col0 Erro
 
 == Substituir peça preta da posição C6 pela peça branca da posição B6
-=moverpeca col1 lin5 col2 lin6 SubstOutro
-=obterpeca col2 lin6 OK
-=obterpeca col1 lin5 Erro
+=moverpeca lin5 col1 lin6 col2 SubstOutro
+=obterpeca lin6 col2 OK
+=obterpeca lin5 col1 Erro
 
 == Inserir peça branca em E6
-=inserirpeca col3 lin7 Peao cor0 PeaoPath OK
-=obterpeca col3 lin7 OK
+=inserirpeca lin7 col3 cor0 Peao PeaoPath OK
+=obterpeca lin7 col3 OK
 
 == Testar mudar peça para casa com peça da mesma cor (de C6 para E6)
-=moverpeca col2 lin6 col3 lin7 MesmoTime
-=obterpeca col3 lin7 OK
-=obterpeca col2 lin6 OK
+=moverpeca lin6 col2 lin7 col3 MesmoTime
+=obterpeca lin7 col3 OK
+=obterpeca lin6 col2 OK
 
 == Testar obter peça para peça fora do tabuleiro
 =obterpeca 9 11 ForaTabuleiro
 
 == Retirar peça da posição C6
-=retirarpeca col2 lin6 OK
-=obterpeca col2 lin6 Erro
+=retirarpeca lin6 col2 OK
+=obterpeca lin6 col2 Erro
 
 == Testar remoção de peça que está fora do tabuleiro
 =retirarpeca 9 12 ForaTabuleiro
 
 == Testar remoção de peça de posição vazia do tabuleiro
-=retirarpeca col7 lin7 Erro
+=retirarpeca lin7 col7 Erro
 
 == Obter lista de ameaçados para a posição D8
-=obterameacados col3 lin7 OK
+=obterameacados lin7 col3 OK
 
 == Testar obter ameaçados para posição fora do tabuleiro
 =obterameacados 9 12 ForaTabuleiro
 
 == Testar obter ameaçados para posição vazia
-=obterameacados col7 lin7 Erro
+=obterameacados lin7 col7 Erro
 
 == Obter lista de ameaçantes para a posição D8
-=obterameacantes col3 lin7 OK
+=obterameacantes lin7 col3 OK
 
 == Testar obter ameaçantes para posição fora do tabuleiro
 =obterameacantes 9 15 ForaTabuleiro
 
 == Testar obter ameaçantes para posição vazia
-=obterameacantes col7 lin7 Erro
+=obterameacantes lin7 col7 Erro
 
 == Destruir tabuleiro 8x8 
 =destruirtabuleiro OK
+
+
 
 
 

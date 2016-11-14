@@ -80,10 +80,7 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
       TST_tpCondRet CondRet ;
 	  
       char   tipoPeca;
-      char * pTipoPeca;
-	  
 	  char   corPeca;
-      char * pCorPeca;	
 		
       /* Testar criar peca */
 		if ( strcmp( ComandoTeste , CRIAR_PECA_CMD ) == 0 )
@@ -101,18 +98,12 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
                return TST_CondRetParm ;
             } /* if */
 			
-			pCorPeca = (char*) malloc(sizeof(char));
-			strcpy(pCorPeca, &corPeca);
-			
-			pTipoPeca = (char*) malloc(sizeof(char));
-			strcpy(pTipoPeca, &tipoPeca);
-			
 			pFilePath = (char*) malloc(strlen(pathPrefix)+strlen(fileName)+1);
 			strcpy(pFilePath, pathPrefix);
 			strcat(pFilePath, fileName);
 			  
             CondRet =
-                 PEC_CriarPeca(&(vtPecas[inxPeca]), pTipoPeca, pCorPeca, pFilePath) ;
+                 PEC_CriarPeca(&(vtPecas[inxPeca]), tipoPeca, corPeca, pFilePath) ;
 				 
             return TST_CompararInt(CondRetEsp, CondRet,
                "Erro ao criar peca.") ;

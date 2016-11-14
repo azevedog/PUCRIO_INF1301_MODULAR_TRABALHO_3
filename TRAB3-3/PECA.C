@@ -56,7 +56,7 @@ typedef struct PEC_tagPeca {
 *
 *  Função: PEC  &Criar peca
 *  ****/
-PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char* identificador,  char* corTime,
+PEC_tpCondRet PEC_CriarPeca(PEC_tppPeca* ppPeca, char identificador,  char corTime,
 char* pathMovimento) {
 
 	(*ppPeca) = (PEC_tpPeca*) malloc( sizeof( PEC_tpPeca)) ;
@@ -66,8 +66,8 @@ char* pathMovimento) {
 	
 	LimparPeca((*ppPeca));
 	
-	(*ppPeca)->identificadorTipo = *identificador;
-	(*ppPeca)->corTime = *corTime;
+	(*ppPeca)->identificadorTipo = identificador;
+	(*ppPeca)->corTime = corTime;
 	(*ppPeca)->pathMovimento = pathMovimento;
 	
 	return PEC_CondRetOK;
@@ -85,13 +85,9 @@ PEC_tpCondRet PEC_ObterIdentificadorPeca(PEC_tppPeca pPeca, char** id) {
 		return PEC_CondRetERRO;
 	}
 	
-	if(strlen((*id)) <3){
-			return PEC_CondRetERRO;
-	}
-	
-	strcpy((*id),  &(pPeca->identificadorTipo));
-	strcat((*id), ",");
-	strcat((*id), &(pPeca->corTime));
+	strncpy((*id),  &(pPeca->identificadorTipo), 1);
+	strncat((*id), ",", 1);
+	strncat((*id), &(pPeca->corTime), 1);
 	
 	return PEC_CondRetOK;
 }/* Fim função: PEC  &ObterIdentificarPeca */
