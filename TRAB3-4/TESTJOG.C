@@ -99,7 +99,7 @@ static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
             if (numLidos != 5){
                return TST_CondRetParm ;
             }
-			printf("\nPRE: %d, %c, %d, %c\n", linInicial, colInicial2, linFinal, colFinal);
+			
 			condRet = JOG_MoverPeca(colInicial2, linInicial, colFinal, linFinal);
 			
 			return TST_CompararInt(condRetEsp, condRet,

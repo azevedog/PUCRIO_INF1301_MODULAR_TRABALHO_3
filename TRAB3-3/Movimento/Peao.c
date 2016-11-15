@@ -18,7 +18,7 @@ int main (int argc, char** argv){
 	finalY = *(argv[4]) - '0';
 	//printf("finalY: %c -> %d\n", *(argv[4]), finalY);
 	
-	if((inicialY >= finalY) || (pow((inicialX-finalX), 2)>1) || (pow((inicialY - finalY),2) > 1)){
+	if((pow((inicialX-finalX), 2)>1) || (pow((inicialY - finalY),2) > 1)){
 		//printf("Resultado: ERRO\n");
 		return 1;	
 	}

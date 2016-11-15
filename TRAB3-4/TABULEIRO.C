@@ -148,8 +148,8 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		if(pPecaOrigem == NULL){
 			return TAB_CondRetPosicaoVazia;
 		}
-		
-		if(PEC_Mover(pPecaOrigem, linhaInicial, colunaInicial, linhaFinal, colunaFinal)!=PEC_CondRetOK){
+
+		if(PEC_Mover(pPecaOrigem, colunaInicial, linhaInicial, colunaFinal, linhaFinal)!=PEC_CondRetOK){
 			return TAB_CondRetElementoNaoFaz;
 		}
 		
