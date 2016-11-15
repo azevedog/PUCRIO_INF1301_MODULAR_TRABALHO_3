@@ -15,7 +15,7 @@
 *     Versão  Autor    Data     Observações
 *		4		gbha		14/nov/2016 Conlusao desenvolvimento T3
 *     3      gbha  13/Nov/2016 Ajustes para o T3
-*	  2       mcs	 2/out/2016 conclusão do desenvolvimento T2
+*	  2       mcs	 2/out/2016 conclusão do desenvolvimento
 *     1       gbha   1/out/2016 início desenvolvimento
 ***************************************************************************/
 
@@ -81,14 +81,17 @@ char* pathMovimento) {
 *  Função: PEC  &ObterIdentificarPeca
 *  ****/
 PEC_tpCondRet PEC_ObterIdentificadorPeca(PEC_tppPeca pPeca, char** id) {
+	char* localString = (char*) malloc(sizeof(char)*4);
 
 	if(pPeca == NULL){
 		return PEC_CondRetERRO;
 	}
 	
-	strncpy((*id),  &(pPeca->identificadorTipo), 1);
-	strncat((*id), ",", 1);
-	strncat((*id), &(pPeca->corTime), 1);
+	strncpy(localString,  &(pPeca->identificadorTipo), 1);
+	strncat(localString, ",", 1);
+	strncat(localString, &(pPeca->corTime), 1);
+	
+	strcpy(*id, localString);
 	
 	return PEC_CondRetOK;
 }/* Fim função: PEC  &ObterIdentificarPeca */

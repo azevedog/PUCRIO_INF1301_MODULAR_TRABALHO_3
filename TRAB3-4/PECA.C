@@ -81,14 +81,17 @@ char* pathMovimento) {
 *  Função: PEC  &ObterIdentificarPeca
 *  ****/
 PEC_tpCondRet PEC_ObterIdentificadorPeca(PEC_tppPeca pPeca, char** id) {
+	char* localString = (char*) malloc(sizeof(char)*4);
 
 	if(pPeca == NULL){
 		return PEC_CondRetERRO;
 	}
 	
-	strncpy((*id),  &(pPeca->identificadorTipo), 1);
-	strncat((*id), ",", 1);
-	strncat((*id), &(pPeca->corTime), 1);
+	strncpy(localString,  &(pPeca->identificadorTipo), 1);
+	strncat(localString, ",", 1);
+	strncat(localString, &(pPeca->corTime), 1);
+	
+	strcpy(*id, localString);
 	
 	return PEC_CondRetOK;
 }/* Fim função: PEC  &ObterIdentificarPeca */
