@@ -26,6 +26,7 @@
 #include    "JOGO.h"
 
 static const char PRINT_POS_CMD         [ ] = "=printpos"     ;
+static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 		
@@ -51,31 +52,43 @@ static const char PRINT_POS_CMD         [ ] = "=printpos"     ;
    {
 	  
       int numLidos   = -1 ,
-          CondRetEsp = -1,
-		  CondRet = -1;
+          condRetEsp = -1,
+		  condRet = -1;
 
        /* Testar Imprimir Posicoes */
          if  ( strcmp( ComandoTeste , PRINT_POS_CMD) == 0 )
          {
 
-            numLidos = LER_LerParametros( "i" , &CondRetEsp);
+            numLidos = LER_LerParametros( "i" , &condRetEsp);
 
             if (numLidos != 1){
                return TST_CondRetParm ;
             }
 			
-			CondRet = JOG_ImprimirPosicoes();
+			condRet = JOG_ImprimirPosicoes();
 			
-			
-            return TST_CompararInt(CondRetEsp, CondRet,
+            return TST_CompararInt(condRetEsp, condRet,
                "Erro ao imprimir as posicoes") ;
          } /* fim ativa: Testar Imprimir Posicoes */
 		 
-		  /* Testar Inserir peca 
-        else if  ( strcmp( ComandoTeste , INSERIR_PECA_CMD) == 0 ){
-
+		  /* Testar Mover peca */
+        else if  ( strcmp( ComandoTeste , MOV_PEC_CMD) == 0 ){
+			
+			char colInicial, colFinal;
+			int linInicial, linFinal;
+			
+			numLidos = LER_LerParametros( "sisii" , &colInicial, &linInicial, &colFinal, &linFinal, &condRetEsp);
+				
+            if (numLidos != 5){
+               return TST_CondRetParm ;
+            }
+			
+			condRet = JOG_MoverPeca(colInicial, linInicial, colFinal, linFinal);
+			
+			return TST_CompararInt(condRetEsp, condRet,
+               "Erro ao imprimir as posicoes") ;
 		
-        } /* fim ativa: Testar Inserir peca */
+        } /* fim ativa: Testar Mover peca */
 		
       return TST_CondRetNaoConhec ;
 

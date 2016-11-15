@@ -176,7 +176,8 @@ typedef enum {
 *
 ***********************************************************************/
 
-   TAB_tpCondRet TAB_MoverPeca(int linhaInicial, int colunaInicial, int linhaFinal, int colunaFinal, TAB_tppTabuleiro tabuleiro);
+   TAB_tpCondRet TAB_MoverPeca(int linhaInicial, int colunaInicial, int linhaFinal,
+   int colunaFinal, TAB_tppTabuleiro tabuleiro);
    
 /***********************************************************************
 *

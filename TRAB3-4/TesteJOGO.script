@@ -5,16 +5,15 @@
 //
 
 == Inicializar valores
-=declararparm  col0 	int 0
-=declararparm  col1 	int 1
-=declararparm  col2 	int 2
-=declararparm  col3 	int 3
-=declararparm  col4 	int 4
-=declararparm  col5 	int 5
-=declararparm  col6 	int 6
-=declararparm  col7 	int 7
+=declararparm  A 	string "A"
+=declararparm  B 	string "B"
+=declararparm  C 	string "C"
+=declararparm  D 	string "D"
+=declararparm  E	string "E"
+=declararparm  F 	string "F"
+=declararparm  G 	string "G"
+=declararparm  H 	string "H"
 
-=declararparm  lin0 	int  0
 =declararparm  lin1 	int  1
 =declararparm  lin2 	int  2
 =declararparm  lin3 	int  3
@@ -22,6 +21,7 @@
 =declararparm  lin5 	int  5
 =declararparm  lin6 	int  6
 =declararparm  lin7 	int  7
+=declararparm  lin8 	int  8
 
 =declararparm  cor0		string  "b"
 =declararparm  cor1		string	"p"
@@ -29,8 +29,15 @@
 =declararparm   OK             int  0
 =declararparm   Erro           int  1
 
-== Imprimir posicoes vazias
+== Imprimir posicoes Iniciais
 =printpos OK
+=printpos OK
+
+== MoverPeca
+=movpec C lin7 C lin8 OK
+
+== Imprimir posicoes Iniciais
+//=printpos OK
 
 
 // fim

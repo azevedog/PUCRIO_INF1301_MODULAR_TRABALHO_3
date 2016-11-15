@@ -55,6 +55,24 @@ typedef enum {
                /* Nao concluiu a solicitacao */
 			   
 } JOG_tpCondRet ;
+
+
+/***********************************************************************
+*
+*  $FC Função: JOG  &ImprimirPosicoes
+*
+*  $ED Descrição da função
+*     Exibe todos os elementos no jogo.
+*
+*  $EP Parâmetros
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Se executou corretamente.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/  
+	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial, char colunaFinal, int linhaFinal);
    
    
 /***********************************************************************

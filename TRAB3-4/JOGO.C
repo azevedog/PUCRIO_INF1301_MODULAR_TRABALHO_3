@@ -46,7 +46,7 @@ TAB_tppTabuleiro tabuleiro;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 	
-	static int converteColuna(char coluna);
+	static int converterColuna(char coluna);
 	
 	static int converterLinha(int linha);
 	
@@ -59,17 +59,40 @@ TAB_tppTabuleiro tabuleiro;
 *  $FC Função: JOG  -ImprimirTabuleiro
 *
 ***********************************************************************/
+	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial, char colunaFinal, int linhaFinal){
+	
+		   int condRet;
+		   int linInicial, colInicial, linFinal, colFinal;
+		   
+			linInicial = converterLinha(linhaInicial);
+			colInicial = converterColuna(colunaInicial);
+			
+			linFinal = converterLinha(linhaFinal);
+			colFinal = converterColuna(colunaFinal);
+		   
+		   condRet = TAB_MoverPeca(linInicial, colInicial, linFinal, colFinal, tabuleiro);
+			
+		return JOG_CondRetOK;
+	}/* Fim função: JOG  -ImprimirTabuleiro*/
 
+/***********************************************************************
+*
+*  $FC Função: JOG  -ImprimirTabuleiro
+*
+***********************************************************************/
    JOG_tpCondRet JOG_ImprimirPosicoes(){
    
 	int lin, col, condRet;
 	char* id =  (char*) malloc(sizeof(char)*4);
 	initTabuleiro();
 	
+	/*Print header */
 	printf("\n\n\n- - POSICOES - -\n\n");
+	
+	/*Print miolo do tabuleiro */
 	for(lin = 0; lin< LINHAS; lin++){
 		printf(" %d | ", (LINHAS - lin));
-	
+		
 		for(col = 0; col< COLUNAS; col++){
 			*id = '\0';
 			condRet = TAB_ObterPeca(lin, col, &id, tabuleiro);
@@ -82,12 +105,14 @@ TAB_tppTabuleiro tabuleiro;
 				return JOG_CondRetErro;
 			}
 		}
+		
 		printf("|\n");
 	}
-	printf("\n   | |_A_| |_B_| |_C_| |_D_| |_E_| |_F_| |_G_| |_H_| |\n");  
-		
+	
 	/* PrintLetters */
+	printf("\n   | |_A_| |_B_| |_C_| |_D_| |_E_| |_F_| |_G_| |_H_| |\n");  
    
+   free(id);
    return JOG_CondRetOK;
    } /* Fim função: JOG  -ImprimirTabuleiro*/	
 
@@ -141,7 +166,7 @@ TAB_tppTabuleiro tabuleiro;
 *
 ***********************************************************************/
 
-   int converteLinha(int linha){
+   int converterLinha(int linha){
 		/* Ajuste das coordenadas 1 based para a matriz interna 0 based, invertendo o
 		 * ponto (0,0)
 		 */
@@ -156,7 +181,7 @@ TAB_tppTabuleiro tabuleiro;
 *
 ***********************************************************************/
 
-   int converteColuna(char coluna){
+   int converterColuna(char coluna){
 
 		int dist;
 		if ((coluna >= 'a') && (coluna <= 'z')){

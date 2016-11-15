@@ -92,6 +92,7 @@ PEC_tpCondRet PEC_ObterIdentificadorPeca(PEC_tppPeca pPeca, char** id) {
 	strncat(localString, &(pPeca->corTime), 1);
 	
 	strcpy(*id, localString);
+	free(localString);
 	
 	return PEC_CondRetOK;
 }/* Fim função: PEC  &ObterIdentificarPeca */
@@ -172,3 +173,4 @@ void LimparPeca( PEC_tppPeca pPeca)
 } /* Fim função: PEC  -Limpa a peca */
 
 /********** Fim do módulo de implementação: LIS  Lista duplamente encadeada **********/
+
