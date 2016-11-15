@@ -42,6 +42,7 @@
 =declararparm   ElemNaoFaz	   int  3
 =declararparm   SubstOutro	   int  4
 =declararparm   MesmoTime	   int  5
+=declararparm   Vazio	   int  6
 
 == Criar tabuleiro de 8x8
 =criartabuleiro 8  8 OK
@@ -70,7 +71,7 @@
 =obterpeca lin7 col6 OK
 
 == Testar obter peça de localização vazia no tabuleiro
-=obterpeca lin7 col7 Erro
+=obterpeca lin7 col7 Vazio
 
 == Inserir peça preta em local inexistente
 =inserirpeca 9 15 cor1 Rei ReiPath ForaTabuleiro
@@ -84,12 +85,12 @@
 == Mover peça da posição A1 para C1
 =moverpeca lin0 col0 lin0 col2 OK
 =obterpeca lin0 col2 OK
-=obterpeca lin0 col0 Erro
+=obterpeca lin0 col0 Vazio
 
 == Substituir peça preta da posição C6 pela peça branca da posição B6
 =moverpeca lin5 col1 lin6 col2 SubstOutro
 =obterpeca lin6 col2 OK
-=obterpeca lin5 col1 Erro
+=obterpeca lin5 col1 Vazio
 
 == Inserir peça branca em E6
 =inserirpeca lin7 col3 cor0 Peao PeaoPath OK
@@ -105,13 +106,13 @@
 
 == Retirar peça da posição C6
 =retirarpeca lin6 col2 OK
-=obterpeca lin6 col2 Erro
+=obterpeca lin6 col2 Vazio
 
 == Testar remoção de peça que está fora do tabuleiro
 =retirarpeca 9 12 ForaTabuleiro
 
 == Testar remoção de peça de posição vazia do tabuleiro
-=retirarpeca lin7 col7 Erro
+=retirarpeca lin7 col7 Vazio
 
 == Obter lista de ameaçados para a posição D8
 =obterameacados lin7 col3 OK
@@ -120,7 +121,7 @@
 =obterameacados 9 12 ForaTabuleiro
 
 == Testar obter ameaçados para posição vazia
-=obterameacados lin7 col7 Erro
+=obterameacados lin7 col7 Vazio
 
 == Obter lista de ameaçantes para a posição D8
 =obterameacantes lin7 col3 OK
@@ -129,7 +130,7 @@
 =obterameacantes 9 15 ForaTabuleiro
 
 == Testar obter ameaçantes para posição vazia
-=obterameacantes lin7 col7 Erro
+=obterameacantes lin7 col7 Vazio
 
 == Destruir tabuleiro 8x8 
 =destruirtabuleiro OK

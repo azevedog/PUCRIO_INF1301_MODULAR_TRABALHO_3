@@ -55,86 +55,16 @@ typedef enum {
                /* Nao concluiu a solicitacao */
 			   
 } JOG_tpCondRet ;
-
-/***********************************************************************
-*
-*  $FC Função: JOG  &Criar Tabuleiro
-*
-*  $ED Descrição da função
-*     Cria um tabuleiro genérico para jogos.
-*
-*  $EP Parâmetros
-*     numColunas  - Número de colunas do tabuleiro.
-*
-*     numLinhas  - Número de linhas do tabuleiro.
-*
-*  $FV Valor retornado
-*     JOG_CondRetOK - Se executou corretamente.
-*     JOG_CondRetErro - Caso contrário.
-* 
-*
-***********************************************************************/
-
-   JOG_tpCondRet  JOG_CriarTabuleiro(int numColunas, int numLinhas);
-		
-/***********************************************************************
-*
-*  $FC Função: JOG  &Inserir Peca
-*
-*  $ED Descrição da função
-*     Criar e inserir uma peca no tabuleiro.
-*
-*  $EP Parâmetros
-*     idPeca  - identificador da peca.
-*
-*     colunaPeca  - coluna onde se encontra a peca.
-*
-*     linhaPeca  - linha onde se encontra a peca.
-*
-*     TAB_MoverPeca  - ponteiro pra funcao mover peca do modulo Tabuleiro.
-*
-*  $FV Valor retornado
-*     JOG_CondRetOK - Se executou corretamente.
-*     JOG_CondRetErro - Caso contrário.
-* 
-*
-***********************************************************************/
-
-   JOG_tpCondRet  JOG_InserirPeca(char idPeca, int colunaPeca, int linhaPeca,
-		int* TAB_MoverPeca (int iniX, int iniY, int fimX, int fimY);
-
-/***********************************************************************
-*
-*  $FC Função: JOG  &Procurar Peca
-*
-*  $ED Descrição da função
-*     Procurar uma peca no tabuleiro.
-*
-*  $EP Parâmetros
-*     idPeca  - identificador da peca.
-*
-*     timePeca  - time da peca.
-*
-*  $FV Valor retornado
-*     JOG_CondRetOK - Se executou corretamente.
-*     JOG_CondRetErro - Caso contrário.
-* 
-*
-***********************************************************************/
-	JOG_tpCondRet  JOG_PocurarPeca(char idPeca, char timePeca);
    
    
 /***********************************************************************
 *
-*  $FC Função: JOG  &Procurar Peca
+*  $FC Função: JOG  &ImprimirPosicoes
 *
 *  $ED Descrição da função
-*     Procurar uma peca no tabuleiro.
+*     Exibe todos os elementos no jogo.
 *
 *  $EP Parâmetros
-*     idPeca  - identificador da peca.
-*
-*     timePeca  - time da peca.
 *
 *  $FV Valor retornado
 *     JOG_CondRetOK - Se executou corretamente.
@@ -142,7 +72,7 @@ typedef enum {
 * 
 *
 ***********************************************************************/  
-   JOG_tpCondRet JOG_ImprimirTabuleiro();
+   JOG_tpCondRet JOG_ImprimirPosicoes();
 
 
 /********** Fim do módulo de definição: JOG Jogo generico de tabuleiro **********/
