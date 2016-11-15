@@ -73,10 +73,10 @@ TAB_tppTabuleiro tabuleiro;
 			if(TAB_ObterPeca(int linhaInicial, int colunaInicial, char** id,
 				TAB_tppTabuleiro tabuleiro) == TAB_CondRetOK){
 				
+				
 			}else{
 				printf("ERROR!!!\n");
 				return JOG_CondRetErro;
-			
 			}
 			
 		}
