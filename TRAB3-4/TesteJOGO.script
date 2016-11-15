@@ -47,4 +47,21 @@
 == Imprimir posicoes Iniciais
 =printpos OK
 
+== MoverPeca
+=movpec C lin6 C lin5 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec D lin3 D lin4 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec C lin5 D lin4 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
 // fim
