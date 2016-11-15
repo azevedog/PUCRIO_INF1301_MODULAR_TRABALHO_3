@@ -49,10 +49,57 @@ TAB_tppTabuleiro tabuleiro;
 	static int converterColuna(char coluna);
 	
 	static int converterLinha(int linha);
-	
-	static int initTabuleiro();
 
 /*****  Código das funções exportadas pelo módulo  *****/
+
+/***********************************************************************
+*
+*  $FC Função: JOG  -IniciaJogo
+*
+***********************************************************************/
+JOG_tpCondRet JOG_IniciaJogo(){
+	
+		//int condRet;
+   
+		tabuleiro = *((TAB_tppTabuleiro*) malloc(sizeof(TAB_tppTabuleiro)));
+		if(tabuleiro == NULL) return JOG_CondRetErro;
+		if(TAB_CriarTabuleiro(COLUNAS, LINHAS, &tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		
+		
+		if(TAB_InserirPeca(0, 0,  'T', 'P', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(0, 2,  'B', 'P', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(0, 3,  'R', 'P', "Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(0, 5,  'B', 'P', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(0, 7,  'T', 'P', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		
+		if(TAB_InserirPeca(1, 0,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 1,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 2,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 3,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 4,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 5,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 6,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(1, 7,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		
+		
+		if(TAB_InserirPeca(6, 0,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 1,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 2,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 3,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 4,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 5,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 6,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(6, 7,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		
+		if(TAB_InserirPeca(7, 0,  'T', 'B', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(7, 2,  'B', 'B', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(7, 3,  'R', 'B', "Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(7, 5,  'B', 'B', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(7, 7,  'T', 'B', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		
+		return JOG_CondRetOK;
+
+}/*Fim função: JOG  - IniciaJogo*/
 
 /***********************************************************************
 *
@@ -64,11 +111,15 @@ TAB_tppTabuleiro tabuleiro;
 		   int condRet;
 		   int linInicial, colInicial, linFinal, colFinal;
 		   
+		   printf("\nANTES: %d, %c, %d, %c\n", linhaInicial, colunaInicial, linhaFinal, colunaFinal);
+		   
 			linInicial = converterLinha(linhaInicial);
 			colInicial = converterColuna(colunaInicial);
 			
 			linFinal = converterLinha(linhaFinal);
 			colFinal = converterColuna(colunaFinal);
+			
+			printf("\nDEPOIS: %d, %d, %d, %d\n", linInicial, colInicial, linFinal, colFinal);
 		   
 		   condRet = TAB_MoverPeca(linInicial, colInicial, linFinal, colFinal, tabuleiro);
 			
@@ -84,7 +135,6 @@ TAB_tppTabuleiro tabuleiro;
    
 	int lin, col, condRet;
 	char* id =  (char*) malloc(sizeof(char)*4);
-	initTabuleiro();
 	
 	/*Print header */
 	printf("\n\n\n- - POSICOES - -\n\n");
@@ -117,48 +167,6 @@ TAB_tppTabuleiro tabuleiro;
    } /* Fim função: JOG  -ImprimirTabuleiro*/	
 
 /*****  Código das funções encapsuladas no módulo  *****/
-
-/***********************************************************************
-*
-*  $FC Função: JOG  -Inicia o tabuleiro
-*
-***********************************************************************/
-
-   int initTabuleiro(){
-   
-		//int condRet;
-   
-		tabuleiro = *((TAB_tppTabuleiro*) malloc(sizeof(TAB_tppTabuleiro)));
-		if(tabuleiro == NULL) return JOG_CondRetErro;
-		if(TAB_CriarTabuleiro(COLUNAS, LINHAS, &tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		
-		
-		if(TAB_InserirPeca(0, 0,  'T', 'P', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(0, 2,  'B', 'P', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(0, 3,  'R', 'P', "Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(0, 5,  'B', 'P', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(0, 7,  'T', 'P', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		
-		if(TAB_InserirPeca(1, 2,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(1, 3,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(1, 4,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(1, 5,  'P', 'P', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		
-		
-		if(TAB_InserirPeca(6, 2,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(6, 3,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(6, 4,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(6, 5,  'P', 'B', "Peao.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		
-		if(TAB_InserirPeca(7, 0,  'T', 'B', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(7, 2,  'B', 'B', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(7, 3,  'R', 'B', "Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(7, 5,  'B', 'B', "Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(7, 7,  'T', 'B', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		
-		return JOG_CondRetOK;
-	}/* Fim função: JOG  -Inicia o tabuleiro*/	
-
 
 /***********************************************************************
 *

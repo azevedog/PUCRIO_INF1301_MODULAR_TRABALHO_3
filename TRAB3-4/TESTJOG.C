@@ -25,6 +25,7 @@
 #include    "LerParm.h"
 #include    "JOGO.h"
 
+static const char INIT_JOG_CMD         [ ] = "=initjogo"     ;
 static const char PRINT_POS_CMD         [ ] = "=printpos"     ;
 static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 
@@ -55,8 +56,23 @@ static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
           condRetEsp = -1,
 		  condRet = -1;
 
+		  /* Testar Iniciar um jogo */
+		  if  ( strcmp( ComandoTeste , INIT_JOG_CMD) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "i" , &condRetEsp);
+
+            if (numLidos != 1){
+               return TST_CondRetParm ;
+            }
+			
+			condRet = JOG_IniciaJogo();
+			return TST_CompararInt(condRetEsp, condRet,
+               "Erro ao iniciar o jogo") ;
+		} /* fim ativa: Testar Iniciar um jogo */
+		  
        /* Testar Imprimir Posicoes */
-         if  ( strcmp( ComandoTeste , PRINT_POS_CMD) == 0 )
+         else if  ( strcmp( ComandoTeste , PRINT_POS_CMD) == 0 )
          {
 
             numLidos = LER_LerParametros( "i" , &condRetEsp);
@@ -74,16 +90,17 @@ static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 		  /* Testar Mover peca */
         else if  ( strcmp( ComandoTeste , MOV_PEC_CMD) == 0 ){
 			
-			char colInicial, colFinal;
+			char colInicial2;
+			char colFinal;
 			int linInicial, linFinal;
 			
-			numLidos = LER_LerParametros( "sisii" , &colInicial, &linInicial, &colFinal, &linFinal, &condRetEsp);
+			numLidos = LER_LerParametros( "sisii" , &colInicial2, &linInicial, &colFinal, &linFinal, &condRetEsp);
 				
             if (numLidos != 5){
                return TST_CondRetParm ;
             }
-			
-			condRet = JOG_MoverPeca(colInicial, linInicial, colFinal, linFinal);
+			printf("\nPRE: %d, %c, %d, %c\n", linInicial, colInicial2, linFinal, colFinal);
+			condRet = JOG_MoverPeca(colInicial2, linInicial, colFinal, linFinal);
 			
 			return TST_CompararInt(condRetEsp, condRet,
                "Erro ao imprimir as posicoes") ;

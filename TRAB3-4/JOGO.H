@@ -56,6 +56,23 @@ typedef enum {
 			   
 } JOG_tpCondRet ;
 
+/***********************************************************************
+*
+*  $FC Função: JOG  &IniciaJogo
+*
+*  $ED Descrição da função
+*     Monta as estruturas necessarias para o jogo comecar.
+*
+*  $EP Parâmetros
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Se executou corretamente.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/  
+   JOG_tpCondRet JOG_IniciaJogo();
+
 
 /***********************************************************************
 *

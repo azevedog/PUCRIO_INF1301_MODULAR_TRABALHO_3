@@ -29,15 +29,17 @@
 =declararparm   OK             int  0
 =declararparm   Erro           int  1
 
+== Inicia o Jogo
+=initjogo OK
+
 == Imprimir posicoes Iniciais
-=printpos OK
 =printpos OK
 
 == MoverPeca
-=movpec C lin7 C lin8 OK
+=movpec C lin7 C lin6 OK
 
 == Imprimir posicoes Iniciais
-//=printpos OK
+=printpos OK
 
 
 // fim
