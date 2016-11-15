@@ -51,9 +51,21 @@ typedef enum {
          JOG_CondRetOK ,
                /* Concluiu corretamente */
 
-         JOG_CondRetErro
+         JOG_CondRetErro,
                /* Nao concluiu a solicitacao */
 			   
+		 JOG_CondRetMovimentoIlegal,
+               /* Movimento não permitido */
+
+         JOG_CondRetEliminouPecaAdversario,
+               /* Movimento comeu uma peca do adversario */
+		
+		JOGCondRetCheque,
+				/* Possivel fim de jogo proximo */
+				
+		JOGCondRetChequeMate
+                /* Fim de jogo */
+				
 } JOG_tpCondRet ;
 
 /***********************************************************************

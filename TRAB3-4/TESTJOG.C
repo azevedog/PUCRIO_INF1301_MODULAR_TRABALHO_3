@@ -45,7 +45,9 @@ static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 *	   
 *     Comandos disponíveis:
 *
+*     =initjogo             CondRetEsp
 *     =printpos             CondRetEsp
+*     =movpec             string int string int CondRetEsp
 *
 ***********************************************************************/
 

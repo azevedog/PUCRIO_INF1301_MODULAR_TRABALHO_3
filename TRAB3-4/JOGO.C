@@ -109,7 +109,7 @@ JOG_tpCondRet JOG_IniciaJogo(){
 *
 ***********************************************************************/
 	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial, char colunaFinal, int linhaFinal){
-		   int linInicial, colInicial, linFinal, colFinal;
+		   int linInicial, colInicial, linFinal, colFinal, condRet;
 		   
 			linInicial = converterLinha(linhaInicial);
 			colInicial = converterColuna(colunaInicial);
@@ -117,7 +117,29 @@ JOG_tpCondRet JOG_IniciaJogo(){
 			linFinal = converterLinha(linhaFinal);
 			colFinal = converterColuna(colunaFinal);
 		   
-		   if(TAB_MoverPeca(linInicial, colInicial, linFinal, colFinal, tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		   condRet = TAB_MoverPeca(linInicial, colInicial, linFinal, colFinal, tabuleiro);
+			
+			switch(condRet){
+				case TAB_CondRetForaTabuleiro:
+					return JOG_CondRetMovimentoIlegal;
+				break;
+              
+				case TAB_CondRetElementoNaoFaz:
+					return JOG_CondRetMovimentoIlegal;
+				break;
+				
+				case TAB_CondRetSubstituiuOutroElemento:
+					return JOG_CondRetEliminouPecaAdversario;
+				break;
+				
+				case TAB_CondRetElementoMesmoTime:
+					return JOG_CondRetMovimentoIlegal;
+				break;
+				
+				case TAB_CondRetPosicaoVazia:
+					return JOG_CondRetErro;
+				break;
+			  }
 			
 		return JOG_CondRetOK;
 	}/* Fim função: JOG  -ImprimirTabuleiro*/

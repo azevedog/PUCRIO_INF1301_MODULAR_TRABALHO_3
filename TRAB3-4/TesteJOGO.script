@@ -28,6 +28,10 @@
 
 =declararparm   OK             int  0
 =declararparm   Erro           int  1
+=declararparm   Ilegal           int  2
+=declararparm   Eliminou          int  3
+=declararparm   Cheque           int  4
+=declararparm   Mate           int  5
 
 == Inicia o Jogo
 =initjogo OK
@@ -60,8 +64,23 @@
 =printpos OK
 
 == MoverPeca
-=movpec C lin5 D lin4 OK
+=movpec C lin5 D lin4 Eliminou
 
 == Imprimir posicoes Iniciais
 =printpos OK
+
+== MoverPeca
+=movpec A lin8 B lin8 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec H lin1 H lin7 Eliminou
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec B lin8 C lin8 Ilegal
 // fim
