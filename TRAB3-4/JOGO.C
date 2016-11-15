@@ -24,7 +24,7 @@
 #include   <malloc.h>
 #include   <assert.h>
 #include	"TABULEIRO.h"
-#include	"LISTA.h"
+#include	"JOGO.h"
 
 #define LINHAS 8
 #define COLUNAS 8
@@ -37,11 +37,11 @@ TAB_tppTabuleiro tabuleiro;
 *
 *
 ***********************************************************************/
-
+/*
    typedef struct JOG_tagJogo {
    
 				/* Numero  */
-			   
+	/*		   
    } JOG_tpJogo ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
@@ -50,7 +50,7 @@ TAB_tppTabuleiro tabuleiro;
 	
 	static int converterLinha(int linha);
 	
-	static void initTabuleiro();
+	static int initTabuleiro();
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -62,29 +62,32 @@ TAB_tppTabuleiro tabuleiro;
 
    JOG_tpCondRet JOG_ImprimirPosicoes(){
    
-	int lin, col;
+	int lin, col, condRet;
+	char* id =  (char*) malloc(sizeof(char)*4);
 	initTabuleiro();
 	
-	
+	printf("\n\n\n- - POSICOES - -\n\n");
 	for(lin = 0; lin< LINHAS; lin++){
-		printf("\n%d ", (LINHAS - lin));
+		printf(" %d | ", (LINHAS - lin));
 	
 		for(col = 0; col< COLUNAS; col++){
-			if(TAB_ObterPeca(int linhaInicial, int colunaInicial, char** id,
-				TAB_tppTabuleiro tabuleiro) == TAB_CondRetOK){
-				
-				
+			condRet = TAB_ObterPeca(lin, col, &id, tabuleiro);
+			if(condRet == TAB_CondRetOK){
+				printf("|%s| ", id);
+			}else if(condRet == TAB_CondRetPosicaoVazia){
+				printf("|_,_| ");
 			}else{
 				printf("ERROR!!!\n");
 				return JOG_CondRetErro;
 			}
-			
 		}
+		printf("|\n");
 	}
+	printf("\n   | |_A_| |_B_| |_C_| |_D_| |_E_| |_F_| |_G_| |_H_| |\n");  
 		
 	/* PrintLetters */
    
-   return JOG_CondRetOK
+   return JOG_CondRetOK;
    } /* Fim função: JOG  -ImprimirTabuleiro*/	
 
 /*****  Código das funções encapsuladas no módulo  *****/
@@ -95,13 +98,19 @@ TAB_tppTabuleiro tabuleiro;
 *
 ***********************************************************************/
 
-   void initTabuleiro(){
+   int initTabuleiro(){
+   
+		//int condRet;
    
 		tabuleiro = *((TAB_tppTabuleiro*) malloc(sizeof(TAB_tppTabuleiro)));
 		if(tabuleiro == NULL) return JOG_CondRetErro;
 		if(TAB_CriarTabuleiro(COLUNAS, LINHAS, &tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		
-	
+		
+		//if(TAB_InserirPeca(0, 0,  'T', 'B', "Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		
+		
+		return JOG_CondRetOK;
 	}/* Fim função: JOG  -Inicia o tabuleiro*/	
 
 
@@ -115,7 +124,7 @@ TAB_tppTabuleiro tabuleiro;
 		/* Ajuste das coordenadas 1 based para a matriz interna 0 based, invertendo o
 		 * ponto (0,0)
 		 */
-		return LINHAS - linha
+		return LINHAS - linha;
    
 	}/* Fim função: JOG  -Converte coordenada da linha*/		
 
@@ -127,11 +136,7 @@ TAB_tppTabuleiro tabuleiro;
 ***********************************************************************/
 
    int converteColuna(char coluna){
-   
-   		/* Ajuste das coordenadas 1 based para a matriz interna 0 based*/
-		inicialX = inicialX -1;
-		finalX = finalX -1;
-	
+
 		int dist;
 		if ((coluna >= 'a') && (coluna <= 'z')){
 			dist = (coluna - 'a');

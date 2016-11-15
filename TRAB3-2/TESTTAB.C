@@ -30,9 +30,6 @@
 #include    "LerParm.h"
 
 #include    "TABULEIRO.h"
-#include	"PECA.h"
-
-
 
 static const char CRIAR_TAB_CMD         [ ] = "=criartabuleiro"     ;
 static const char INSERIR_PECA_CMD         [ ] = "=inserirpeca"     ;
@@ -42,34 +39,10 @@ static const char OBTER_PECA_CMD         [ ] = "=obterpeca"     ;
 static const char OBTER_CADOS_CMD         [ ] = "=obterameacados"     ;
 static const char OBTER_CANTES_CMD         [ ] = "=obterameacantes"     ;
 static const char DESTRUIR_TABULEIRO_CMD      [ ] = "=destruirtabuleiro"  ;
-
-
-
-#define TRUE  1
-#define FALSE 0
-
-#define VAZIO     0
-#define NAO_VAZIO 1
-
-#define DIM_VALOR     100
   
 TAB_tppTabuleiro tab = NULL;
 LIS_tppLista pLista = NULL;
-
-
-/***** Protótipos das funções encapuladas no módulo *****/
 		
-	static void ExcluirValor ( void * pDado );
-		/* Essa funcao é de lista, mas enquanto nao existe um modulo jogo
-		que use essa condicao inserir de fora, o teste do tabuleiro deve exercer
-		essa funcao (simular minimamente um jogo)*/
-		
-	static int Compara ( void* elem1, void* elem2);
-		/* Essa funcao é de peca, mas enquanto nao existe um modulo jogo
-		que use essa condicao de criar a peca e inserir de fora, o teste do 
-		tabuleiro deve exercer essa funcao (simular minimamente um jogo)*/
-		
-
 /*****  Código das funções exportadas pelo módulo  *****/
 
 
@@ -286,33 +259,7 @@ LIS_tppLista pLista = NULL;
       return TST_CondRetNaoConhec ;
 
    } /* Fim função: TTAB &Testar Tabuleiro */
-      
-
-/*****  Código das funções encapsuladas no módulo  *****/
-   
-/***********************************************************************
-*
-*  $FC Função: TTAB -Excluir simulando jogo
-*
-***********************************************************************/
-
-   void ExcluirValor ( void * pDado ) {
-		PEC_LiberarPeca(pDado);
-   } /* Fim função: TTAB -Excluir */   
    
    
- /***********************************************************************
-*
-*  $FC Função: TTAB -Compara simulando jogo
-*
-***********************************************************************/
-
-   int Compara ( void* elem1, void* elem2 ) {
-		if(PEC_ComparaPeca(elem1, elem2) == PEC_CondRetMesmoTime){
-			return 1;
-		}
-		return 0;
-   } /* Fim função: TTAB -Excluir */   
-   
-/********** Fim do módulo de implementação: TLIS Teste lista de símbolos **********/
+/********** Fim do módulo de implementação: TTAB Teste Tabuleiro **********/
 

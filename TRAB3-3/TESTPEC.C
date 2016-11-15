@@ -34,23 +34,16 @@ static const char LIBERAR_PECA_CMD      [ ] = "=liberarpeca"  ;
 static const char MOVER_PECA_CMD      	[ ] = "=moverpeca"    ;
 static const char COMPARAR_PECA_CMD		[ ] = "=compararpeca" ;
 
-
-
+#define DIM_VT_PECA   10
 #define TRUE  1
 #define FALSE 0
-
-#define DIM_VT_PECA   10
 
 PEC_tppPeca vtPecas[ DIM_VT_PECA];
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-   static void DestruirValor( void * pValor ) ;
-
    static int ValidarInxPeca( int inxPeca ) ;
-   
-   static int Mover( int inicialX, int inicialY, int finalX, int finalY);
-
+	/*Valida a posicao no vetor interno */
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -174,21 +167,6 @@ PEC_tppPeca vtPecas[ DIM_VT_PECA];
       return TST_CondRetNaoConhec ;
 	}/* Fim função: TPEC &Testar Pecas */
 /*****  Código das funções encapsuladas no módulo  *****/
-
-
-/***********************************************************************
-*
-*  $FC Função: TPEC -Mover (teste hardcoded para torre xadrez)
-*
-***********************************************************************/
-
-   int Mover( int inicialX, int inicialY, int finalX, int finalY)
-   {
-		if((inicialX != finalX) && (inicialY != finalY)){
-			return 0;
-		}
-		return 1;
-   } /* Fim função: TPEC -Mover */
 
 
 /***********************************************************************
