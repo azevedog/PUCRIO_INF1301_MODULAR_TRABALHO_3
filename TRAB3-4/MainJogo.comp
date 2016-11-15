@@ -1,0 +1,24 @@
+# Composicao do programa de teste de uma peca genérica
+# Este exemplo utiliza o arcabouço completo 
+
+[Diretorios]
+
+Nome        =  MainJOGO
+PathDefault =  .
+err         =  .
+
+[Modulos]
+MainJOGO
+JOGO
+TABULEIRO
+PECA
+LISTA
+
+[BuildInicio]
+/OUT:Main.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+
+[Fim]

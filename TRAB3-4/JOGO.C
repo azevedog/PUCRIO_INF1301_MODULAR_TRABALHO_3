@@ -30,6 +30,8 @@
 #define COLUNAS 8
 
 TAB_tppTabuleiro tabuleiro;
+char* player1;
+char* player2;
 
 /***********************************************************************
 *

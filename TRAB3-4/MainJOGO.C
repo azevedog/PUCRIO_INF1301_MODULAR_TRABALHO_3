@@ -21,12 +21,33 @@
 #include   <string.h>
 #include   <memory.h>
 #include   <malloc.h>
-#include	"TABULEIRO.h"
-#include	"LISTA.h"
+#include	"JOGO.h"
+
+#define PLAYER_NAME_SIZE 10
+
+char player1[PLAYER_NAME_SIZE];
+char player2[PLAYER_NAME_SIZE];
+
+void printWelcome(){
+	printf("\n******************************\n");
+	printf("* Bem Vindo ao Xadrez Voador * \n");
+	printf("*          EAMCEMP           * \n");
+	printf("******************************\n");
+}
+
+void getPlayerNames(){
+	printf("\nDigite o nome do Jogador 1 em %d caracteres: ", PLAYER_NAME_SIZE);
+	scanf("%s", player1);
+	printf("\nDigite o nome do Jogador 2 em %d caracteres: ", PLAYER_NAME_SIZE);
+	scanf("%s", player2);
+}
 
 
 int main(void){
-
+	printWelcome();
+	getPlayerNames();
+	JOG_IniciaJogo();
+	JOG_ImprimirPosicoes();
 }			
 
 /********** Fim do módulo de implementação: PRI Implementacao do xadrez para o usuario **********/
