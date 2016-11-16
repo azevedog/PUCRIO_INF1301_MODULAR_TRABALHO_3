@@ -1,0 +1,9 @@
+Data    Horas Trabalhadas    Tipo Tarefa		        Descrição da Tarefa Realizada
+02/11   2                    estudar                    Estudo do enunciado do trabalho 3
+08/11   2                    estudar 			        Iniciar projeto do trabalho 3
+09/11   1                    projetar		       	    Projetar trabalho e dividir tarefas
+12/11   4                    especificar funções 	    Especificação das funções do módulo jogo
+13/11   4                    codificar		            Codificar início do módulo jogo
+15/11   2                    projetar 			     	Criar arquivo MODELO.pdf
+15/11   2                    projetar 			     	Criar arquivo para arquitetura do trabalho
+16/11	1		             corrigir			        Corrigir e finalizar o módulo jogo
