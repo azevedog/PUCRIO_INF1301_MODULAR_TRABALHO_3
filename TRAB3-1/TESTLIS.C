@@ -232,7 +232,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetMemoria ;
             } /* if */
 
-            CondRet = LIS_ObterValor( vtListas[ inxLista ], (char *)pDado );
+            CondRet = LIS_ObterValor( vtListas[ inxLista ], &pDado );
 			
 			if ( CondRet == 0 ){
 				if ( strcmp(StringDado, pDado) == 0) 
@@ -259,7 +259,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRet = IrProximoLista( vtListas[ inxLista ] ) ;
+            CondRet = LIS_IrProximoLista( vtListas[ inxLista ] ) ;
 
             return TST_CompararInt( CondRetEsp , CondRet,
               "Condição de retorno errada ao ir para o próximo elemento") ;
@@ -279,7 +279,7 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRet = IrAnteriorLista( &(vtListas[ inxLista ]) ) ;
+            CondRet = LIS_IrAnteriorLista(vtListas[ inxLista ] ) ;
 
             return TST_CompararInt( CondRetEsp , CondRet,
               "Condição de retorno errada ao ir para o elemento anterior") ;

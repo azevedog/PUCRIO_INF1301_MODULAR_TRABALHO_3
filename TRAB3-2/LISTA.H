@@ -15,7 +15,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*		7		gbha		14/nov/2016 Conlusao desenvolvimento T3
+*		7 		gbha		14/nov/2016 Conlusao desenvolvimento T3
 *     6       mcs   01/out/2016 implementar mudancas do T2, adaptando o módulo 
 *     5       mcs   13/set/2016 implementar mudancas do T1 (procurar valor na lista)
 *     4       avs   01/fev/2006 criar linguagem script simbólica
@@ -219,7 +219,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void * pValor ) ;
+   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void ** pValor ) ;
 
 
 /***********************************************************************
@@ -241,7 +241,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   LIS_tpCondRet IrProximoLista( LIS_tppLista pLista ) ;
+   LIS_tpCondRet LIS_IrProximoLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -263,7 +263,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   LIS_tpCondRet IrAnteriorLista( LIS_tppLista * pLista ) ;
+   LIS_tpCondRet LIS_IrAnteriorLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************

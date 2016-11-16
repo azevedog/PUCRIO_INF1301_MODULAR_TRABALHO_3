@@ -30,8 +30,8 @@
 =declararparm   Erro           int  1
 =declararparm   Ilegal           int  2
 =declararparm   Eliminou          int  3
-=declararparm   Cheque           int  4
-=declararparm   Mate           int  5
+=declararparm   Ameacada           int  4
+=declararparm   Ameaca           int  5
 
 == Inicia o Jogo
 =initjogo OK
@@ -62,6 +62,12 @@
 
 == Imprimir posicoes Iniciais
 =printpos OK
+
+== Validar ameacantes D4
+=valameacante D lin4 OK
+
+== Validar ameacados D4
+=valameacado D lin4 OK
 
 == MoverPeca
 =movpec C lin5 D lin4 Eliminou

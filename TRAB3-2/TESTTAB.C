@@ -171,7 +171,7 @@ LIS_tppLista pLista = NULL;
                return TST_CondRetParm ;
             } /* if */
 			
-			id = (char*) malloc(sizeof(char)*200);
+			id = (char*) malloc(sizeof(char)*4);
 			CondRet = TAB_ObterPeca(x, y, &id, tab); 
 			
             if(CondRet == TAB_CondRetOK){

@@ -105,7 +105,7 @@ JOG_tpCondRet JOG_IniciaJogo(){
 
 /***********************************************************************
 *
-*  $FC Função: JOG  -ImprimirTabuleiro
+*  $FC Função: JOG  -MoverPeca
 *
 ***********************************************************************/
 	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial, char colunaFinal, int linhaFinal){
@@ -142,11 +142,112 @@ JOG_tpCondRet JOG_IniciaJogo(){
 			  }
 			
 		return JOG_CondRetOK;
-	}/* Fim função: JOG  -ImprimirTabuleiro*/
-
+	}/* Fim função: JOG  -MoverPeca*/
+	
 /***********************************************************************
 *
-*  $FC Função: JOG  -ImprimirTabuleiro
+*  $FC Função: JOG  -ValidarAmeacantes
+*
+***********************************************************************/	
+	JOG_tpCondRet JOG_ValidarAmeacantes(char colunaInicial, int linhaInicial){
+		int linInicial, colInicial, condRet;
+		LIS_tppLista pLista;
+		char* tempString = (char*) malloc(sizeof(char)*4);
+		
+		linInicial = converterLinha(linhaInicial);
+		colInicial = converterColuna(colunaInicial);
+		
+		pLista = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
+	
+		condRet = TAB_ObterListaAmeacantes(linInicial, colInicial, &pLista, tabuleiro);
+		switch(condRet){
+			case TAB_CondRetForaTabuleiro:
+				return JOG_CondRetMovimentoIlegal;
+			break;
+             
+			case TAB_CondRetPosicaoVazia:
+				return JOG_CondRetMovimentoIlegal;
+			break;
+				
+			case TAB_CondRetErro:
+				return JOG_CondRetErro;
+			break;
+		}
+		
+		condRet = -1;
+		do{
+			condRet = LIS_IrAnteriorLista(pLista);
+			if(condRet == LIS_CondRetListaVazia) return JOG_CondRetErro;
+		}while(condRet!=LIS_CondRetInicioLista);
+		
+		printf("\nAmeacantes de %c%d:", colunaInicial, linhaInicial);
+		do{
+			if(LIS_ObterValor(pLista, &tempString)) return JOG_CondRetErro;
+			printf("\n%s", tempString);
+			condRet = LIS_IrProximoLista(pLista);
+			if(condRet == LIS_CondRetErro) return JOG_CondRetErro;
+		}while(condRet!=LIS_CondRetFimLista);
+		
+		free(tempString);
+		LIS_DestruirLista(pLista);		
+		return JOG_CondRetOK;
+	
+	}/* Fim função: JOG  -ValidarAmeacantes*/
+
+	
+/***********************************************************************
+*
+*  $FC Função: JOG  -ValidarAmeacados
+*
+***********************************************************************/	
+	JOG_tpCondRet JOG_ValidarAmeacados(char colunaInicial, int linhaInicial){
+		int linInicial, colInicial, condRet;
+		LIS_tppLista pLista;
+		char* tempString = (char*) malloc(sizeof(char)*4);
+		
+		linInicial = converterLinha(linhaInicial);
+		colInicial = converterColuna(colunaInicial);
+		
+		pLista = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
+	
+		condRet = TAB_ObterListaAmeacados(linInicial, colInicial, &pLista, tabuleiro);
+		switch(condRet){
+			case TAB_CondRetForaTabuleiro:
+				return JOG_CondRetMovimentoIlegal;
+			break;
+             
+			case TAB_CondRetPosicaoVazia:
+				return JOG_CondRetMovimentoIlegal;
+			break;
+				
+			case TAB_CondRetErro:
+				return JOG_CondRetErro;
+			break;
+		}
+		
+		condRet = -1;
+		do{
+			condRet = LIS_IrAnteriorLista(pLista);
+			if(condRet == LIS_CondRetListaVazia) return JOG_CondRetErro;
+		}while(condRet!=LIS_CondRetInicioLista);
+		
+		printf("\nAmeacados de %c%d:", colunaInicial, linhaInicial);
+		do{
+			if(LIS_ObterValor(pLista, &tempString)) return JOG_CondRetErro;
+			printf("\n%s", tempString);
+			condRet = LIS_IrProximoLista(pLista);
+			if(condRet == LIS_CondRetErro) return JOG_CondRetErro;
+		}while(condRet!=LIS_CondRetFimLista);
+		
+		free(tempString);
+		LIS_DestruirLista(pLista);		
+		return JOG_CondRetOK;
+	
+	}/* Fim função: JOG  -ValidarAmeacados*/
+	
+/***********************************************************************
+*
+*  $FC Função: JOG  -ImprimirPosicoes
 *
 ***********************************************************************/
    JOG_tpCondRet JOG_ImprimirPosicoes(){
@@ -182,7 +283,7 @@ JOG_tpCondRet JOG_IniciaJogo(){
    
    free(id);
    return JOG_CondRetOK;
-   } /* Fim função: JOG  -ImprimirTabuleiro*/	
+   } /* Fim função: JOG  -ImprimirPosicoes*/	
 
 /*****  Código das funções encapsuladas no módulo  *****/
 

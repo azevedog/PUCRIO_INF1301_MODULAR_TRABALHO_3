@@ -233,7 +233,8 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *  ****/
  TAB_tpCondRet TAB_ObterListaAmeacantes(int linhaInicial, int colunaInicial, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro){
-	
+		
+		char* ameacanteId;
 		int x, y;
 		char* idLista= "T";
 		PEC_tppPeca pPecaOrigem;
@@ -256,9 +257,13 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 				if(x!=colunaInicial && y!= linhaInicial){
 					pPecaOrigem = tabuleiro->posicoes[y][x];
 					if(pPecaOrigem != NULL){
-						if(PEC_Mover(pPecaOrigem, x, y, linhaInicial, colunaInicial) == PEC_CondRetOK){
+						if(PEC_Mover(pPecaOrigem, x, y, colunaInicial, linhaInicial) == PEC_CondRetOK){
 							if(PEC_ComparaPeca(pPecaDestino, pPecaOrigem) == PEC_CondRetTimeDiferente){
-								LIS_InserirElemento((*lista), pPecaOrigem);
+								ameacanteId = (char*) malloc(sizeof(char)*4);
+								if(PEC_ObterIdentificadorPeca(pPecaOrigem, &ameacanteId) != PEC_CondRetOK){
+									return TAB_CondRetErro;
+								}
+								LIS_InserirElemento((*lista), ameacanteId);
 							}
 						}
 					}
@@ -277,6 +282,7 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
  TAB_tpCondRet TAB_ObterListaAmeacados(int linhaInicial, int colunaInicial, LIS_tppLista* lista,
 	TAB_tppTabuleiro tabuleiro){
 		
+		char* ameacadoId;
 		int x, y;
 		char* idLista= "D";
 		PEC_tppPeca pPecaOrigem;
@@ -297,11 +303,15 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		for(y=0; y<tabuleiro->linhas; y++){
 			for(x=0; x<tabuleiro->colunas; x++){
 				if(x!=colunaInicial && y!=linhaInicial){
-					if(PEC_Mover(pPecaOrigem, linhaInicial, colunaInicial, x, y) == PEC_CondRetOK){
+					if(PEC_Mover(pPecaOrigem, colunaInicial, linhaInicial, x, y) == PEC_CondRetOK){
 						pPecaDestino = tabuleiro->posicoes[y][x];
 						if(pPecaDestino != NULL){
 							if(PEC_ComparaPeca(pPecaDestino, pPecaOrigem) == PEC_CondRetTimeDiferente){
-								LIS_InserirElemento((*lista), pPecaDestino);
+								ameacadoId = (char*) malloc(sizeof(char)*4);
+								if(PEC_ObterIdentificadorPeca(pPecaDestino, &ameacadoId) != PEC_CondRetOK){
+									return TAB_CondRetErro;
+								}
+								LIS_InserirElemento((*lista), ameacadoId);
 							}
 						}
 					}
@@ -363,7 +373,8 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 *
 ***********************************************************************/
    void ExcluirValor ( void * pDado ) {
-		PEC_LiberarPeca(pDado);
+		free(pDado);
+		//PEC_LiberarPeca(pDado);
    } /* Fim função: TAB -Excluir */  
 	
 	

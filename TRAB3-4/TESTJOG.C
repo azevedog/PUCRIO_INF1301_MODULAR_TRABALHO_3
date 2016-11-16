@@ -28,6 +28,8 @@
 static const char INIT_JOG_CMD         [ ] = "=initjogo"     ;
 static const char PRINT_POS_CMD         [ ] = "=printpos"     ;
 static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
+static const char VAL_AMEACANTES_CMD         [ ] = "=valameacante";
+static const char VAL_AMEACADOS_CMD         [ ] = "=valameacado";
 
 /***** Protótipos das funções encapuladas no módulo *****/
 		
@@ -48,6 +50,8 @@ static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 *     =initjogo             CondRetEsp
 *     =printpos             CondRetEsp
 *     =movpec             string int string int CondRetEsp
+*	  =valameacante			string int CondRetEsp
+*	  =valameacado			string int CondRetEsp
 *
 ***********************************************************************/
 
@@ -105,9 +109,45 @@ static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 			condRet = JOG_MoverPeca(colInicial2, linInicial, colFinal, linFinal);
 			
 			return TST_CompararInt(condRetEsp, condRet,
-               "Erro ao imprimir as posicoes") ;
+               "Erro ao mover de posicao") ;
 		
         } /* fim ativa: Testar Mover peca */
+		
+		 /* Testar Validar Ameacantes */
+		else if  ( strcmp( ComandoTeste , VAL_AMEACANTES_CMD) == 0 ){
+		
+			char colInicial2;
+			int linInicial;
+			
+			numLidos = LER_LerParametros("sii" , &colInicial2, &linInicial, &condRetEsp);
+				
+            if (numLidos != 3){
+               return TST_CondRetParm ;
+            }
+			
+			condRet = JOG_ValidarAmeacantes(colInicial2, linInicial);
+			
+			return TST_CompararInt(condRetEsp, condRet,
+               "Erro ao validar ameacantes as posicoes") ;
+		} /* fim ativa: Validar Ameacantes */
+		
+		/* Testar Validar Ameacados */
+		else if  ( strcmp( ComandoTeste , VAL_AMEACADOS_CMD) == 0 ){
+		
+			char colInicial2;
+			int linInicial;
+			
+			numLidos = LER_LerParametros("sii" , &colInicial2, &linInicial, &condRetEsp);
+				
+            if (numLidos != 3){
+               return TST_CondRetParm ;
+            }
+			
+			condRet = JOG_ValidarAmeacados(colInicial2, linInicial);
+			
+			return TST_CompararInt(condRetEsp, condRet,
+               "Erro ao validar ameacados as posicoes") ;
+		}/* fim ativa: Validar Ameacados */
 		
       return TST_CondRetNaoConhec ;
 

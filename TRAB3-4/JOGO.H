@@ -60,11 +60,12 @@ typedef enum {
          JOG_CondRetEliminouPecaAdversario,
                /* Movimento comeu uma peca do adversario */
 		
-		JOGCondRetCheque,
-				/* Possivel fim de jogo proximo */
+		JOGCondRetAmecada,
+				/* Indica que outros elementos ameacam uma posicao */
 				
-		JOGCondRetChequeMate
-                /* Fim de jogo */
+		JOGCondRetAmeaca
+                /* Indica que o elemento desta posicao ameaca outros
+				elementos */
 				
 } JOG_tpCondRet ;
 
@@ -76,7 +77,7 @@ typedef enum {
 *     Monta as estruturas necessarias para o jogo comecar.
 *
 *  $EP Parâmetros
-*
+*	
 *  $FV Valor retornado
 *     JOG_CondRetOK - Se executou corretamente.
 *     JOG_CondRetErro - Caso contrário.
@@ -88,22 +89,68 @@ typedef enum {
 
 /***********************************************************************
 *
-*  $FC Função: JOG  &ImprimirPosicoes
+*  $FC Função: JOG  &MoverPeca
 *
 *  $ED Descrição da função
 *     Exibe todos os elementos no jogo.
 *
 *  $EP Parâmetros
-*
+*		colunaInicial - Letra da coluna de onde se quer tirar a peca.
+*		linhaInicial - Numero da linha de onde se quer tirar a peca.
+*		colunaFinal - Letra da coluna para onde se quer mover a peca.
+*		linhaFinal - Letra da linha para onde se quer mover a peca.
+*	
 *  $FV Valor retornado
 *     JOG_CondRetOK - Se executou corretamente.
+*     JOG_CondRetMovimentoIlegal - Caso nao tenha sido possivel realizar.
+*     JOG_CondRetEliminouPecaAdversario - Caso tenha comido adversario.
 *     JOG_CondRetErro - Caso contrário.
 * 
 *
 ***********************************************************************/  
-	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial, char colunaFinal, int linhaFinal);
+	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial,
+	char colunaFinal, int linhaFinal);
    
-   
+/***********************************************************************
+*
+*  $FC Função: JOG  &ValidarAmeacantes
+*
+*  $ED Descrição da função
+*     Determina se uma posicao sofre ameaca.
+*
+*  $EP Parâmetros
+*		colunaInicial - Letra da coluna de onde se quer verificar a condicao.
+*		linhaInicial - Numero da linha de onde se quer verificar a condicao.
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Caso nao seja ameacada.
+*	  JOGCondRetAmecada - Caso seja ameacada.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/  
+	JOG_tpCondRet JOG_ValidarAmeacantes(char colunaInicial, int linhaInicial);
+	
+/***********************************************************************
+*
+*  $FC Função: JOG  &ValidarAmeacados
+*
+*  $ED Descrição da função
+*     Determina se uma posicao esta ameacando.
+*
+*  $EP Parâmetros
+*		colunaInicial - Letra da coluna de onde se quer verificar a condicao.
+*		linhaInicial - Numero da linha de onde se quer verificar a condicao.
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Caso nao esteja ameacando ninguem.
+*	  JOGCondRetAmeaca - Caso esteja ameacando alguem.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/  
+	JOG_tpCondRet JOG_ValidarAmeacados(char colunaInicial, int linhaInicial);
+	
 /***********************************************************************
 *
 *  $FC Função: JOG  &ImprimirPosicoes

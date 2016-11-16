@@ -219,7 +219,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void * pValor ) ;
+   LIS_tpCondRet LIS_ObterValor( LIS_tppLista pLista, void ** pValor ) ;
 
 
 /***********************************************************************
@@ -241,7 +241,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   LIS_tpCondRet IrProximoLista( LIS_tppLista pLista ) ;
+   LIS_tpCondRet LIS_IrProximoLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -263,7 +263,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   LIS_tpCondRet IrAnteriorLista( LIS_tppLista * pLista ) ;
+   LIS_tpCondRet LIS_IrAnteriorLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************

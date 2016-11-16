@@ -12,7 +12,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*		7 		gbha		14/nov/2016 Conlusao desenvolvimento T3
+*		7		gbha		14/nov/2016 Conlusao desenvolvimento T3
 *     6       mcs   01/out/2016 implementar mudancas do T2, adaptando o módulo 
 *     5       mcs   13/set/2016 implementar mudancas do T1 (procurar valor na lista)
 *     4       avs   01/fev/2006 criar linguagem script simbólica
@@ -299,7 +299,7 @@
 *  Função: LIS  &Ir para o próximo elemento 
 *  ****/
 
-   LIS_tpCondRet IrProximoLista ( LIS_tppLista pLista )
+   LIS_tpCondRet LIS_IrProximoLista ( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
@@ -325,22 +325,22 @@
 *  Função: LIS  &Ir para o elemento anterior
 *  ****/
 
-   LIS_tpCondRet IrAnteriorLista( LIS_tppLista * pLista )
+   LIS_tpCondRet LIS_IrAnteriorLista( LIS_tppLista pLista )
    {
 
       #ifdef _DEBUG
-         assert( (*pLista) != NULL ) ;
+         assert(pLista != NULL ) ;
       #endif
 
-      if ( (*pLista)->pElemCorr == NULL){
+      if (pLista->pElemCorr == NULL){
          return LIS_CondRetListaVazia ;
       }
 
-	  if( (*pLista)->pOrigemLista == (*pLista)->pElemCorr ){
+	  if( pLista->pOrigemLista == pLista->pElemCorr ){
          return LIS_CondRetInicioLista ;
       } /* if */
 	  
-      (*pLista)->pElemCorr = (*pLista)->pElemCorr->pAnt ;
+      pLista->pElemCorr = pLista->pElemCorr->pAnt ;
 
       return LIS_CondRetOK ;
    } /* Fim função: LIS  &Ir para o elemento anterior */
