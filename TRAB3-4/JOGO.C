@@ -108,7 +108,8 @@ JOG_tpCondRet JOG_IniciaJogo(){
 *  $FC Função: JOG  -MoverPeca
 *
 ***********************************************************************/
-	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial, char colunaFinal, int linhaFinal){
+	JOG_tpCondRet JOG_MoverPeca(char colunaInicial, int linhaInicial,
+	char colunaFinal, int linhaFinal){
 		   int linInicial, colInicial, linFinal, colFinal, condRet;
 		   
 			linInicial = converterLinha(linhaInicial);
@@ -174,20 +175,23 @@ JOG_tpCondRet JOG_IniciaJogo(){
 			break;
 		}
 		
+		printf("\nAmeacantes de %c%d:", colunaInicial, linhaInicial);
 		condRet = -1;
 		do{
 			condRet = LIS_IrAnteriorLista(pLista);
-			if(condRet == LIS_CondRetListaVazia) return JOG_CondRetErro;
+			if(condRet == LIS_CondRetListaVazia){
+				printf("\n(VAZIO)");
+				return JOG_CondRetErro;
+			}
 		}while(condRet!=LIS_CondRetInicioLista);
 		
-		printf("\nAmeacantes de %c%d:", colunaInicial, linhaInicial);
 		do{
 			if(LIS_ObterValor(pLista, &tempString)) return JOG_CondRetErro;
 			printf("\n%s", tempString);
 			condRet = LIS_IrProximoLista(pLista);
 			if(condRet == LIS_CondRetErro) return JOG_CondRetErro;
 		}while(condRet!=LIS_CondRetFimLista);
-		
+
 		free(tempString);
 		LIS_DestruirLista(pLista);		
 		return JOG_CondRetOK;
@@ -225,13 +229,16 @@ JOG_tpCondRet JOG_IniciaJogo(){
 			break;
 		}
 		
+		printf("\nAmeacados de %c%d:", colunaInicial, linhaInicial);
 		condRet = -1;
 		do{
 			condRet = LIS_IrAnteriorLista(pLista);
-			if(condRet == LIS_CondRetListaVazia) return JOG_CondRetErro;
+			if(condRet == LIS_CondRetListaVazia){
+				printf("\n(VAZIO)");
+				return JOG_CondRetErro;
+			}
 		}while(condRet!=LIS_CondRetInicioLista);
 		
-		printf("\nAmeacados de %c%d:", colunaInicial, linhaInicial);
 		do{
 			if(LIS_ObterValor(pLista, &tempString)) return JOG_CondRetErro;
 			printf("\n%s", tempString);
@@ -256,7 +263,7 @@ JOG_tpCondRet JOG_IniciaJogo(){
 	char* id =  (char*) malloc(sizeof(char)*4);
 	
 	/*Print header */
-	printf("\n\n\n- - POSICOES - -\n\n");
+	printf("\n\n- - POSICOES - -\n\n");
 	
 	/*Print miolo do tabuleiro */
 	for(lin = 0; lin< LINHAS; lin++){

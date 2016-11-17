@@ -254,7 +254,7 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		
 		for(y=0; y<tabuleiro->linhas; y++){
 			for(x=0; x<tabuleiro->colunas; x++){
-				if(x!=colunaInicial && y!= linhaInicial){
+				if(!(x==colunaInicial && y== linhaInicial)){
 					pPecaOrigem = tabuleiro->posicoes[y][x];
 					if(pPecaOrigem != NULL){
 						if(PEC_Mover(pPecaOrigem, x, y, colunaInicial, linhaInicial) == PEC_CondRetOK){
@@ -302,7 +302,7 @@ TAB_tpCondRet TAB_CriarTabuleiro(int numColunas, int numLinhas,
 		
 		for(y=0; y<tabuleiro->linhas; y++){
 			for(x=0; x<tabuleiro->colunas; x++){
-				if(x!=colunaInicial && y!=linhaInicial){
+				if(!(x==colunaInicial && y== linhaInicial)){
 					if(PEC_Mover(pPecaOrigem, colunaInicial, linhaInicial, x, y) == PEC_CondRetOK){
 						pPecaDestino = tabuleiro->posicoes[y][x];
 						if(pPecaDestino != NULL){
