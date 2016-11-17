@@ -30,8 +30,10 @@
 #define COLUNAS 8
 
 TAB_tppTabuleiro tabuleiro;
-char* player1;
-char* player2;
+int colunaRB = 3;
+int linhaRB = 7;
+int colunaRP = 3;
+int linhaRP = 0;
 
 /***********************************************************************
 *
@@ -51,6 +53,9 @@ char* player2;
 	static int converterColuna(char coluna);
 	
 	static int converterLinha(int linha);
+	
+	static void atualizaPosicaoReis(int colunaInicial, int linhaInicial,
+	int colunaFinal, int linhaFinal);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -70,7 +75,7 @@ JOG_tpCondRet JOG_IniciaJogo(){
 		
 		if(TAB_InserirPeca(0, 0,  'T', 'P', ".\\Movimento\\Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		if(TAB_InserirPeca(0, 2,  'B', 'P', ".\\Movimento\\Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(0, 3,  'R', 'P', ".\\Movimento\\Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(linhaRP, colunaRP,  'R', 'P', ".\\Movimento\\Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		if(TAB_InserirPeca(0, 5,  'B', 'P', ".\\Movimento\\Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		if(TAB_InserirPeca(0, 7,  'T', 'P', ".\\Movimento\\Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		
@@ -95,7 +100,7 @@ JOG_tpCondRet JOG_IniciaJogo(){
 		
 		if(TAB_InserirPeca(7, 0,  'T', 'B', ".\\Movimento\\Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		if(TAB_InserirPeca(7, 2,  'B', 'B', ".\\Movimento\\Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
-		if(TAB_InserirPeca(7, 3,  'R', 'B', ".\\Movimento\\Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
+		if(TAB_InserirPeca(linhaRB, colunaRB,  'R', 'B', ".\\Movimento\\Rei.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		if(TAB_InserirPeca(7, 5,  'B', 'B', ".\\Movimento\\Bispo.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		if(TAB_InserirPeca(7, 7,  'T', 'B', ".\\Movimento\\Torre.exe", tabuleiro) != TAB_CondRetOK) return JOG_CondRetErro;
 		
@@ -117,6 +122,8 @@ JOG_tpCondRet JOG_IniciaJogo(){
 			
 			linFinal = converterLinha(linhaFinal);
 			colFinal = converterColuna(colunaFinal);
+			
+			
 		   
 		   condRet = TAB_MoverPeca(linInicial, colInicial, linFinal, colFinal, tabuleiro);
 			
@@ -141,7 +148,9 @@ JOG_tpCondRet JOG_IniciaJogo(){
 					return JOG_CondRetErro;
 				break;
 			  }
+			  
 			
+		atualizaPosicaoReis(linInicial, colInicial, colFinal, linFinal);			
 		return JOG_CondRetOK;
 	}/* Fim função: JOG  -MoverPeca*/
 	
@@ -254,6 +263,21 @@ JOG_tpCondRet JOG_IniciaJogo(){
 	
 /***********************************************************************
 *
+*  $FC Função: JOG  &ValidarReis
+*
+***********************************************************************/  
+	JOG_tpCondRet JOG_ValidarReis(){
+		
+		printf("\nRei - Preto:");
+		JOG_tpCondRet JOG_ValidarAmeacantes(colunaRP, linhaRP);
+		
+		printf("\nRei - Branco:");
+		JOG_tpCondRet JOG_ValidarAmeacantes(colunaRB, linhaRB);
+
+	}/* Fim função: JOG  -ValidarReis*/	
+	
+/***********************************************************************
+*
 *  $FC Função: JOG  -ImprimirPosicoes
 *
 ***********************************************************************/
@@ -325,7 +349,26 @@ JOG_tpCondRet JOG_IniciaJogo(){
 			dist = coluna - 'A';
 		}
 		return dist;
-	}/* Fim função: JOG  -Converte coordenada da coluna*/			
+	}/* Fim função: JOG  -Converte coordenada da coluna*/	
+
+	   
+/***********************************************************************
+*
+*  $FC Função: JOG  -Atualiza posicao dos reis
+*
+***********************************************************************/
+static void atualizaPosicaoReis(int colunaInicial, int linhaInicial,
+	int colunaFinal, int linhaFinal){
+	
+	if(linhaInicial == colunaRB && colunaInicial == linhaRB){
+		colunaRB = colunaFinal;
+		linhaRB = linhaFinal;
+	}else if(linhaInicial == colunaRP && colunaInicial == linhaRP){
+		colunaRB = colunaFinal;
+		linhaRB = linhaFinal;
+	}
+	
+}/* Fim função: JOG  -Atualiza posicao dos reis*/
 
 /********** Fim do módulo de implementação: JOG  Jogo generico **********/
 

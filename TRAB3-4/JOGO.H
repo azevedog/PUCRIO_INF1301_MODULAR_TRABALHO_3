@@ -63,10 +63,12 @@ typedef enum {
 		JOGCondRetAmecada,
 				/* Indica que outros elementos ameacam uma posicao */
 				
-		JOGCondRetAmeaca
+		JOGCondRetAmeaca,
                 /* Indica que o elemento desta posicao ameaca outros
 				elementos */
 				
+		JOGCondRetChequeMate
+				/* Indica o fim do jogo */
 } JOG_tpCondRet ;
 
 /***********************************************************************
@@ -150,6 +152,24 @@ typedef enum {
 *
 ***********************************************************************/  
 	JOG_tpCondRet JOG_ValidarAmeacados(char colunaInicial, int linhaInicial);
+	
+/***********************************************************************
+*
+*  $FC Função: JOG  &ValidarReis
+*
+*  $ED Descrição da função
+*     Determina se os reis estão sob ameaca.
+*
+*  $EP Parâmetros
+*
+*  $FV Valor retornado
+*     JOG_CondRetOK - Caso nao esteja ameacando ninguem.
+*	  JOGCondRetChequeMate - Caso o jogo tenha chegado ao fim.
+*     JOG_CondRetErro - Caso contrário.
+* 
+*
+***********************************************************************/  
+	JOG_tpCondRet JOG_ValidarReis();	
 	
 /***********************************************************************
 *

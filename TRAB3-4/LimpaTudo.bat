@@ -11,4 +11,4 @@ del *.list
 del *.estat
 del *.pdb
 del TesteJogo*.exe
-del Main*.exe
+del PRINCIPAL*.exe

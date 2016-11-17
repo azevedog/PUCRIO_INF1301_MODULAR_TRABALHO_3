@@ -1,13 +1,13 @@
 @ECHO  OFF
 REM  Compila todos os exemplos simples 
-gmake /cMainJOGO /pgmake
+gmake /cPRINCIPAL /pgmake
 
 pushd  .
 
 del *.err
 
 del *.obj
-nmake /FMainJOGO.make 
+nmake /FPRINCIPAL.make 
 
 copy  *.err  tudo.err
 

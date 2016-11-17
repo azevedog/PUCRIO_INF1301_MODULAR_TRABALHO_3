@@ -3,19 +3,19 @@
 
 [Diretorios]
 
-Nome        =  MainJOGO
+Nome        =  PRINCIPAL
 PathDefault =  .
 err         =  .
 
 [Modulos]
-MainJOGO
+PRINCIPAL
 JOGO
 TABULEIRO
 PECA
 LISTA
 
 [BuildInicio]
-/OUT:Main.exe
+/OUT:PRINCIPAL.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 
