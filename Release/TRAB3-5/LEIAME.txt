@@ -1,0 +1,11 @@
+// Trabalho realizado por Gustavo Azevedo e Maria Carolina Santos
+
+// Modo de Uso do programa
+
+	Esta eh programa efetivo do xadrez voador, sem codigos de teste. Como nao ha teste, nao ha scripts nem
+estatisticas, logo nao eh necessario um bat para chamar o exe (dado que nao ha parametros na chamada do exe).
+Mais infos no modulo 3-4. Divirta-se.
+
+// OBSERVACOES
+	Ao rodar direto o executavel, fica dificil ver a msg de conclusao do programa. Recomenda-se rodar o exe
+diretamente pelo terminal.

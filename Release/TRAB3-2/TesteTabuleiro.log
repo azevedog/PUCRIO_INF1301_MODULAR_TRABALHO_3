@@ -1,0 +1,48 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: TRAB3-2
+!!!      Script de teste:     TesteTabuleiro.script
+
+!!!    0  Linha:     1  // Script:    TesteTabuleiro.script 
+!!!    0  Linha:     2  // Autor:     MCS e GBHA 
+!!!    0  Linha:     3  // Data:      02/out/2016 
+!!!    0  Linha:     4  // Propósito: Testar o módulo tabuleiro 
+!!!    0  Linha:     5  // 
+    7  == Inicializar valores
+   47  == Criar tabuleiro de 8x8
+   50  == Inserir peça branca no tabuleiro na posição B6
+   55  == Testar inserir peça em posição B6 ocupada do tabuleiro
+   59  == Inserir peça preta na posição C6
+   63  == Inserir peça preta na posição A1
+   67  == Inserir peça branca na posição D8
+   70  == Obter peça da posição D8
+   73  == Testar obter peça de localização vazia no tabuleiro
+   76  == Inserir peça preta em local inexistente
+   79  == Realizar movimento inadequado com peça
+   82  == Mover peça da posição B2 para fora do tabuleiro
+   85  == Mover peça da posição A1 para C1
+   90  == Substituir peça preta da posição C6 pela peça branca da posição B6
+   95  == Inserir peça branca em E6
+   99  == Testar mudar peça para casa com peça da mesma cor (de C6 para E6)
+  104  == Testar obter peça para peça fora do tabuleiro
+  107  == Retirar peça da posição C6
+  111  == Testar remoção de peça que está fora do tabuleiro
+  114  == Testar remoção de peça de posição vazia do tabuleiro
+  117  == Obter lista de ameaçados para a posição D8
+  120  == Testar obter ameaçados para posição fora do tabuleiro
+  123  == Testar obter ameaçados para posição vazia
+  126  == Obter lista de ameaçantes para a posição D8
+  129  == Testar obter ameaçantes para posição fora do tabuleiro
+  132  == Testar obter ameaçantes para posição vazia
+  135  == Destruir tabuleiro 8x8
+!!!    0  Linha:   142  // fim 
+
+!!! Número de linhas lidas:         142
+!!! Número de casos de teste:        27
+!!! Número comandos corretos:        71
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

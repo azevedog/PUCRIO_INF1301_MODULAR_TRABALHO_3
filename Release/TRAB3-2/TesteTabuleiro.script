@@ -1,0 +1,142 @@
+// Script:    TesteTabuleiro.script
+// Autor:     MCS e GBHA
+// Data:      02/out/2016
+// Propósito: Testar o módulo tabuleiro
+//
+
+== Inicializar valores
+=declararparm  col0 	int 0
+=declararparm  col1 	int 1
+=declararparm  col2 	int 2
+=declararparm  col3 	int 3
+=declararparm  col4 	int 4
+=declararparm  col5 	int 5
+=declararparm  col6 	int 6
+=declararparm  col7 	int 7
+
+=declararparm  lin0 	int  0
+=declararparm  lin1 	int  1
+=declararparm  lin2 	int  2
+=declararparm  lin3 	int  3
+=declararparm  lin4 	int  4
+=declararparm  lin5 	int  5
+=declararparm  lin6 	int  6
+=declararparm  lin7 	int  7
+
+=declararparm  cor0		string  "b"
+=declararparm  cor1		string	"p"
+
+=declararparm   Torre 	string "T"
+=declararparm   Rei 		string "R"
+=declararparm   Bispo 	string "B"
+=declararparm   Peao 	string "P"
+
+=declararparm   TorrePath string "Torre.exe"
+=declararparm   ReiPath string "Rei.exe"
+=declararparm   BispoPath string "Bispo.exe"
+=declararparm   PeaoPath string "Peao.exe"
+
+=declararparm   OK             int  0
+=declararparm   Erro           int  1
+=declararparm   ForaTabuleiro  int  2
+=declararparm   ElemNaoFaz	   int  3
+=declararparm   SubstOutro	   int  4
+=declararparm   MesmoTime	   int  5
+=declararparm   Vazio	   int  6
+
+== Criar tabuleiro de 8x8
+=criartabuleiro 8  8 OK
+
+== Inserir peça branca no tabuleiro na posição B6
+=inserirpeca lin5 col1 cor0 Peao PeaoPath OK
+
+=obterpeca lin5 col1 OK
+
+== Testar inserir peça em posição B6 ocupada do tabuleiro 
+=inserirpeca lin5 col1 cor1 Torre TorrePath Erro
+=obterpeca lin5 col1 OK
+
+== Inserir peça preta na posição C6
+=inserirpeca lin6 col2 cor1 Rei ReiPath OK
+=obterpeca lin6 col2 OK
+
+== Inserir peça preta na posição A1
+=inserirpeca lin0 col0 cor1 Torre TorrePath OK
+=obterpeca lin0 col0 OK
+
+== Inserir peça branca na posição D8
+=inserirpeca lin7 col6 cor0 Peao PeaoPath OK
+
+== Obter peça da posição D8
+=obterpeca lin7 col6 OK
+
+== Testar obter peça de localização vazia no tabuleiro
+=obterpeca lin7 col7 Vazio
+
+== Inserir peça preta em local inexistente
+=inserirpeca 9 15 cor1 Rei ReiPath ForaTabuleiro
+
+== Realizar movimento inadequado com peça
+=moverpeca lin0 col0 lin1 col1 ElemNaoFaz
+
+== Mover peça da posição B2 para fora do tabuleiro
+=moverpeca lin1 col1 9 9 ForaTabuleiro
+
+== Mover peça da posição A1 para C1
+=moverpeca lin0 col0 lin0 col2 OK
+=obterpeca lin0 col2 OK
+=obterpeca lin0 col0 Vazio
+
+== Substituir peça preta da posição C6 pela peça branca da posição B6
+=moverpeca lin5 col1 lin6 col2 SubstOutro
+=obterpeca lin6 col2 OK
+=obterpeca lin5 col1 Vazio
+
+== Inserir peça branca em E6
+=inserirpeca lin7 col3 cor0 Peao PeaoPath OK
+=obterpeca lin7 col3 OK
+
+== Testar mudar peça para casa com peça da mesma cor (de C6 para E6)
+=moverpeca lin6 col2 lin7 col3 MesmoTime
+=obterpeca lin7 col3 OK
+=obterpeca lin6 col2 OK
+
+== Testar obter peça para peça fora do tabuleiro
+=obterpeca 9 11 ForaTabuleiro
+
+== Retirar peça da posição C6
+=retirarpeca lin6 col2 OK
+=obterpeca lin6 col2 Vazio
+
+== Testar remoção de peça que está fora do tabuleiro
+=retirarpeca 9 12 ForaTabuleiro
+
+== Testar remoção de peça de posição vazia do tabuleiro
+=retirarpeca lin7 col7 Vazio
+
+== Obter lista de ameaçados para a posição D8
+=obterameacados lin7 col3 OK
+
+== Testar obter ameaçados para posição fora do tabuleiro
+=obterameacados 9 12 ForaTabuleiro
+
+== Testar obter ameaçados para posição vazia
+=obterameacados lin7 col7 Vazio
+
+== Obter lista de ameaçantes para a posição D8
+=obterameacantes lin7 col3 OK
+
+== Testar obter ameaçantes para posição fora do tabuleiro
+=obterameacantes 9 15 ForaTabuleiro
+
+== Testar obter ameaçantes para posição vazia
+=obterameacantes lin7 col7 Vazio
+
+== Destruir tabuleiro 8x8 
+=destruirtabuleiro OK
+
+
+
+
+
+// fim

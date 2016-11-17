@@ -1,0 +1,28 @@
+// Trabalho realizado por Gustavo Azevedo e Maria Carolina Santos
+
+// Modo de Uso do programa
+
+	O programa pode ser utilizado de forma simples, com dois cliques no arquivo: TRAB3-3.bat. 
+	O programa aceita scripts de teste para a estrutura do módulo descrita no arquivo PECA.H
+	e exibe seus resultados no arquivo TestePeca.txt. Caso queira gerar novos casos de teste,
+	edite o arquivo TestePECA.script seguindo a sintaxe abaixo para cada função externa do módulo.
+
+//Comandos do script do teste de PECA
+
+*     =criarpeca                 inxPec string string CondRetEsp
+*     =liberarpeca               inxLista CondRetEsp
+*     =moverpeca               inxLista int int int int CondRetEsp
+*	  =comparapeca				 inxPec inxPec CondRetEsp
+
+// Observações:
+
+	Nesta nova versao o programa sofreu grandes alteracoes, a principal delas diz respeito ao movimento da peca.
+Anteriormente a peca guardava um ponteiro de funcao para uma implementacao externa de seu movimento, com o intuito
+de ser mais flexivel e servir para muitos jogos. Agora a peca continua com estas mesmas caracteristicas, porem de 
+forma mais organizada. Agora a peca armazena o path para um executavel de seu movimento.
+	Nesta versao, ainda não foi criado o conceito de direcao do movimento que permitira a distincao entre pecas do
+time preto que descem o tabuleiro vs. pecas brancas que sobem o tabuleiro. Com essa distincao será possivel fazer
+com que as pecas parem de "voar", passando a ter trajetoria entre o ponto inicial e final. Alem disso isso permitira
+mais validacoes das regras de movimento (ex.: restringir o peao andar pra traz).
+	A pasta padrao de executaveis e a pasta Movimento, no diretorio local do programa. Outros paths podem ser passados.
+	

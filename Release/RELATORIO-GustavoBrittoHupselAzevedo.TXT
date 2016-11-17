@@ -1,14 +1,11 @@
 ﻿Data    Horas Trabalhadas    Tipo Tarefa		        Descrição da Tarefa Realizada
-21/09   2                    especificar módulos        Definir separação dos módulos (Tabuleiro, lista e peça).
-25/09	4					estudar						Revisão do arcabouco com a Maria e Configuracao do ambiente dela.
-01/10   2                    projetar                	Criacoa de repositorio no gitHub e organizacao da carga de trabalho.
-01/10	4					codificar					Inicio desenvolvimento modulo peca
-02/10	4					codificar					Conclusao desenvolvimento modulo peca
-03/10	6					codificar					Inicio desenvolvimento modulo tabuleiro
-04/10	4					codificar					Continuacao desenvolvimento modulo tabuleiro
-05/10	4					codificar					Continuacao desenvolvimento modulo tabuleiro
-09/10	6					codificar					Continuacao desenvolvimento modulo tabuleiro
-10/10	4					codificar					Conclusao desenvolvimento modulo tabuleiro
-10/10   4                    testes                      Testes, correções e ajustes.
-10/10   1                    revisar código	        Revisões para entrega e finalzação de documentação.
-10/10	1 					revisar codigo			Release da versao.
+05/10   2                    especificar módulos        Revisão da proposta de separação dos módulos (Tabuleiro, lista, peça) revendo relacao tabuleiro/peca.
+05/11	4					codificar					Ajustes no modulo peca
+13/10   2                   codificar                	Ajustes no modulo tabuleiro
+14/10	4					codificar					Ajustes no modulo tabuleiro
+15/10	4					codificar					Inicio desenvolvimento modulo JOGO
+16/10	6					codificar					Conclusao desenvolvimento modulo JOGO
+16/10	4					codificar					Conclusao desenvolvimento modulo PRINCIPAL
+16/10   4                    testes                      Testes, correções e ajustes.
+16/10   1                    revisar código	        Revisões para entrega e finalzação de documentação.
+16/11	1 					revisar codigo			Release da versao.

@@ -1,0 +1,109 @@
+// Script:    TesteJogo.script
+// Autor:     MCS e GBHA
+// Data:      15/nov/2016
+// Propósito: Testar o módulo Jogo
+//
+
+== Inicializar valores
+=declararparm  A 	string "A"
+=declararparm  B 	string "B"
+=declararparm  C 	string "C"
+=declararparm  D 	string "D"
+=declararparm  E	string "E"
+=declararparm  F 	string "F"
+=declararparm  G 	string "G"
+=declararparm  H 	string "H"
+
+=declararparm  lin1 	int  1
+=declararparm  lin2 	int  2
+=declararparm  lin3 	int  3
+=declararparm  lin4 	int  4
+=declararparm  lin5 	int  5
+=declararparm  lin6 	int  6
+=declararparm  lin7 	int  7
+=declararparm  lin8 	int  8
+
+=declararparm  cor0		string  "b"
+=declararparm  cor1		string	"p"
+
+=declararparm   OK             int  0
+=declararparm   Erro           int  1
+=declararparm   Ilegal           int  2
+=declararparm   Eliminou          int  3
+=declararparm   Ameacada           int  4
+=declararparm   Ameaca           int  5
+=declararparm   CheckMate           int  6
+
+== Inicia o Jogo
+=initjogo OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec C lin7 C lin6 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec D lin2 D lin3 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec C lin6 C lin5 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec D lin3 D lin4 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== Validar ameacantes D4
+=valameacante D lin4 OK
+
+== Validar ameacados D4
+=valameacado D lin4 OK
+
+== MoverPeca
+=movpec C lin5 D lin4 Eliminou
+
+== Validar reis
+=valreis OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec A lin8 B lin8 OK
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec H lin1 H lin7 Eliminou
+
+== Imprimir posicoes Iniciais
+=printpos OK
+
+== MoverPeca
+=movpec B lin8 C lin8 Ilegal
+
+== Prepara CheckMate
+=movpec A lin1 A lin6 OK
+=movpec D lin7 D lin6 OK
+=movpec A lin6 D lin6 Eliminou
+=movpec D lin8 E lin8 OK
+=printpos OK
+=movpec D lin6 D lin8 OK
+=printpos OK
+
+== Avalia CheckMate
+=valreis CheckMate
+
+// fim

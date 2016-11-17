@@ -1,0 +1,26 @@
+// Trabalho realizado por Gustavo Azevedo e Maria Carolina Santos
+
+// Modo de Uso do programa
+
+	O programa pode ser utilizado de forma simples, com dois cliques no arquivo: TRAB3-4.bat. 
+	O programa aceita scripts de teste para a estrutura do módulo descrita no arquivo JOGO.H
+	e exibe seus resultados no arquivo TesteJogo.txt. Caso queira gerar novos casos de teste,
+	edite o arquivo TesteJogo.script seguindo a sintaxe abaixo para cada função externa do módulo.
+
+//Comandos do script do teste de JOGO
+
+*     =initjogo             CondRetEsp
+*     =printpos             CondRetEsp
+*     =movpec             string int string int CondRetEsp
+*	  =valameacante			string int CondRetEsp
+*	  =valameacado			string int CondRetEsp
+*	  =valreis			CondRetEsp
+
+// Observações:
+	Este modulo e o Juiz do jogo de xadrez voador (ver modulo peca). Suas funcoes servem apenas para organizar
+a logica de acesso das funcoes dos modulos genericos inferiores.
+
+// Resalvas:
+	Não foi feito controle de vez de jogador vs. peca efetivamente mexida. Assim, cabe aos humanos garantir que
+o player 1 joga sempre com as pretas e o player 2 faz movimentos sempre com as brancas. Foi implementado a repe
+ticao da jogada em caso de movimento ilegal.

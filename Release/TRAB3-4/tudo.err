@@ -1,0 +1,13 @@
+PRINCIPAL.c
+JOGO.c
+TABULEIRO.c
+PECA.c
+LISTA.c
+Microsoft (R) Incremental Linker Version 9.00.30729.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:PRINCIPAL.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+PRINCIPAL.obj JOGO.obj TABULEIRO.obj PECA.obj LISTA.obj 
+

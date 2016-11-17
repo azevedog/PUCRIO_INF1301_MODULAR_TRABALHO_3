@@ -1,0 +1,44 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: TRAB3-4
+!!!      Script de teste:     TesteJogo.script
+
+!!!    0  Linha:     1  // Script:    TesteJogo.script 
+!!!    0  Linha:     2  // Autor:     MCS e GBHA 
+!!!    0  Linha:     3  // Data:      15/nov/2016 
+!!!    0  Linha:     4  // Propósito: Testar o módulo Jogo 
+!!!    0  Linha:     5  // 
+    7  == Inicializar valores
+   37  == Inicia o Jogo
+   40  == Imprimir posicoes Iniciais
+   43  == MoverPeca
+   46  == Imprimir posicoes Iniciais
+   49  == MoverPeca
+   52  == Imprimir posicoes Iniciais
+   55  == MoverPeca
+   58  == Imprimir posicoes Iniciais
+   61  == MoverPeca
+   64  == Imprimir posicoes Iniciais
+   67  == Validar ameacantes D4
+   70  == Validar ameacados D4
+   73  == MoverPeca
+   76  == Validar reis
+   79  == Imprimir posicoes Iniciais
+   82  == MoverPeca
+   85  == Imprimir posicoes Iniciais
+   88  == MoverPeca
+   91  == Imprimir posicoes Iniciais
+   94  == MoverPeca
+   97  == Prepara CheckMate
+  106  == Avalia CheckMate
+!!!    0  Linha:   109  // fim 
+
+!!! Número de linhas lidas:         109
+!!! Número de casos de teste:        23
+!!! Número comandos corretos:        53
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0
