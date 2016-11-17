@@ -12,8 +12,9 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*      1       gbha   5/NOV/2016 início desenvolvimento
+*      3       gbha   16/nov/2016 Conclusao do desenvolvimento
 *      2       mcs   11/nov/2016 Continuação do desenvolvimento
+*      1       gbha   5/NOV/2016 início desenvolvimento
 *
 *
 ***************************************************************************/
@@ -29,11 +30,11 @@
 #define LINHAS 8
 #define COLUNAS 8
 
-TAB_tppTabuleiro tabuleiro;
-int colunaRB = 3;
-int linhaRB = 7;
-int colunaRP = 3;
-int linhaRP = 0;
+static TAB_tppTabuleiro tabuleiro;
+static int colunaRB = 3;
+static int linhaRB = 7;
+static int colunaRP = 3;
+static int linhaRP = 0;
 
 /***********************************************************************
 *
@@ -51,11 +52,17 @@ int linhaRP = 0;
 /***** Protótipos das funções encapuladas no módulo *****/
 	
 	static int converterColuna(char coluna);
+		/* Converte de letra para numero.*/
 	
 	static int converterLinha(int linha);
-	
+		/* Converte para zero based.*/	
+		
 	static void atualizaPosicaoReis(int colunaInicial, int linhaInicial,
 	int colunaFinal, int linhaFinal);
+		/* Atualiza linha e coluna de cada rei.*/
+	
+	static JOG_tpCondRet JOG_ValidarReiInternal(int linhaIni, int colunaIni, char* label);
+		/* Avalia situacao de ameaca do rei.*/
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -267,13 +274,11 @@ JOG_tpCondRet JOG_IniciaJogo(){
 *
 ***********************************************************************/  
 	JOG_tpCondRet JOG_ValidarReis(){
-		
-		printf("\nRei - Preto:");
-		JOG_tpCondRet JOG_ValidarAmeacantes(colunaRP, linhaRP);
-		
-		printf("\nRei - Branco:");
-		JOG_tpCondRet JOG_ValidarAmeacantes(colunaRB, linhaRB);
 
+		if(JOG_ValidarReiInternal(linhaRP, colunaRP, "Preto")
+		== JOGCondRetCheckMate) return JOGCondRetCheckMate;
+		return JOG_ValidarReiInternal(linhaRB, colunaRB, "Branco");
+		
 	}/* Fim função: JOG  -ValidarReis*/	
 	
 /***********************************************************************
@@ -317,6 +322,72 @@ JOG_tpCondRet JOG_IniciaJogo(){
    } /* Fim função: JOG  -ImprimirPosicoes*/	
 
 /*****  Código das funções encapsuladas no módulo  *****/
+	
+/***********************************************************************
+*
+*  $FC Função: JOG  -ValidarReiInternal
+*
+***********************************************************************/
+JOG_tpCondRet JOG_ValidarReiInternal(int linhaIni, int colunaIni, char* label){
+		LIS_tppLista pLista;
+		int lin, col, condRet;
+		int numChecks = 0;
+		char* tempString = (char*) malloc(sizeof(char)*4);
+		
+		pLista = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
+		condRet = TAB_ObterListaAmeacantes(linhaIni, colunaIni, &pLista, tabuleiro);
+		if(condRet == TAB_CondRetErro) return JOG_CondRetErro;
+		
+		if(condRet == TAB_CondRetOK){
+			if(LIS_IrAnteriorLista(pLista) != LIS_CondRetListaVazia){
+				printf("\nRei %s: Check", label);
+				LIS_DestruirLista(pLista);
+				for(lin = (linhaIni - 1); lin <= (linhaIni + 1); lin++){
+					for(col = (colunaIni - 1); col <= (colunaIni + 1); col++){
+						if(!(lin == linhaIni && col == colunaIni)){
+							condRet = TAB_ObterPeca(lin, col, &tempString, tabuleiro);
+							if(condRet == TAB_CondRetOK || condRet == TAB_CondRetForaTabuleiro){
+								numChecks++;
+							}else if(condRet == TAB_CondRetPosicaoVazia){
+								if(TAB_MoverPeca(linhaIni, colunaIni, lin, col, tabuleiro) == TAB_CondRetOK){
+									pLista = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
+									condRet = TAB_ObterListaAmeacantes(lin, col, &pLista, tabuleiro);
+									if(condRet == TAB_CondRetErro) return JOG_CondRetErro;
+									if(condRet == TAB_CondRetOK){
+										if(LIS_IrAnteriorLista(pLista) != LIS_CondRetListaVazia){
+											numChecks++;
+										}
+										LIS_DestruirLista(pLista);
+									}
+									if(TAB_MoverPeca(lin, col, linhaIni, colunaIni, tabuleiro) == TAB_CondRetErro) return JOG_CondRetErro;
+								}
+							}else{
+								pLista = *((LIS_tppLista*) malloc(sizeof(LIS_tppLista)));
+								condRet = TAB_ObterListaAmeacantes(lin, col, &pLista, tabuleiro);
+								if(condRet == TAB_CondRetErro) return JOG_CondRetErro;
+								if(condRet == TAB_CondRetOK){
+									if(LIS_IrAnteriorLista(pLista) != LIS_CondRetListaVazia){
+										numChecks++;
+									}
+									LIS_DestruirLista(pLista);
+								}
+							}
+						}
+			
+					}
+				}
+				if(numChecks == 8){
+					printf("Mate\n");
+					return JOGCondRetCheckMate;
+				}
+			}
+		}
+		
+		free(tempString);
+		return JOG_CondRetOK;
+		
+	}/* Fim função: JOG  -ValidarReiInternal*/	
+
 
 /***********************************************************************
 *

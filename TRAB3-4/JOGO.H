@@ -13,8 +13,9 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*      1       gbha   5/nov/2016 Início desenvolvimento
+*      3       gbha   16/nov/2016 Conclusao do desenvolvimento
 *      2       mcs   11/nov/2016 Continuação do desenvolvimento
+*      1       gbha   5/nov/2016 Início desenvolvimento
 *
 *
 *  $ED Descrição do módulo
@@ -67,7 +68,7 @@ typedef enum {
                 /* Indica que o elemento desta posicao ameaca outros
 				elementos */
 				
-		JOGCondRetChequeMate
+		JOGCondRetCheckMate
 				/* Indica o fim do jogo */
 } JOG_tpCondRet ;
 
@@ -164,7 +165,7 @@ typedef enum {
 *
 *  $FV Valor retornado
 *     JOG_CondRetOK - Caso nao esteja ameacando ninguem.
-*	  JOGCondRetChequeMate - Caso o jogo tenha chegado ao fim.
+*	  JOGCondRetCheckMate - Caso o jogo tenha chegado ao fim.
 *     JOG_CondRetErro - Caso contrário.
 * 
 *

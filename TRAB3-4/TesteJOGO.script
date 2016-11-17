@@ -32,6 +32,7 @@
 =declararparm   Eliminou          int  3
 =declararparm   Ameacada           int  4
 =declararparm   Ameaca           int  5
+=declararparm   CheckMate           int  6
 
 == Inicia o Jogo
 =initjogo OK
@@ -72,6 +73,9 @@
 == MoverPeca
 =movpec C lin5 D lin4 Eliminou
 
+== Validar reis
+=valreis OK
+
 == Imprimir posicoes Iniciais
 =printpos OK
 
@@ -89,4 +93,17 @@
 
 == MoverPeca
 =movpec B lin8 C lin8 Ilegal
+
+== Prepara CheckMate
+=movpec A lin1 A lin6 OK
+=movpec D lin7 D lin6 OK
+=movpec A lin6 D lin6 Eliminou
+=movpec D lin8 E lin8 OK
+=printpos OK
+=movpec D lin6 D lin8 OK
+=printpos OK
+
+== Avalia CheckMate
+=valreis CheckMate
+
 // fim

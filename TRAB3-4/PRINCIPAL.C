@@ -1,7 +1,7 @@
 /***************************************************************************
 *  $MCI Módulo de implementação: PRI Implementacao do xadrez para o usuario 
 *
-*  Arquivo gerado:              MainJOGO.c
+*  Arquivo gerado:              PRINCIPAL.c
 *  Letras identificadoras:      PRI
 *
 *  Nome da base de software:    OpenJogos
@@ -12,7 +12,8 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*      1       gbha   14/NOV/2016 início desenvolvimento
+*      2       gbha   16/NOV/2016 Conclusao desenvolvimento
+*      1       gbha   14/NOV/2016 Início desenvolvimento
 *
 *
 ***************************************************************************/
@@ -27,12 +28,10 @@
 #define END_GAME "FIM"
 #define ZERO 48
 
-char player0[PLAYER_NAME_SIZE];
-char player1[PLAYER_NAME_SIZE];
-char origem[4];
-char destino[4];
+static char player0[PLAYER_NAME_SIZE];
+static char player1[PLAYER_NAME_SIZE];
 
-
+/* Funcao interna para imprimir boas vindas.*/
 void printWelcome(){
 	printf("\n\n\n  ******************************\n");
 	printf("  * Bem Vindo ao Xadrez Voador * \n");
@@ -40,6 +39,7 @@ void printWelcome(){
 	printf("  ******************************\n\n\n");
 }
 
+/* Funcao interna para ler nome dos jogadores. */
 void getPlayerNames(){
 	printf("\nDigite o nome do Jogador 1 em %d caracteres: ", PLAYER_NAME_SIZE);
 	scanf("%s", player0);
@@ -47,14 +47,24 @@ void getPlayerNames(){
 	scanf("%s", player1);
 }
 
+/* Funcao interna de encerramento.*/
+void shutDownHook(){
+	printf("\n\nObrigado por jogar o Xadrez Voador, volte sempre :-)\n\n");
+	exit(42);
+}
+
+/* Funcao interna para exibicao do resultado da jogada. */
 void showTurnResult(char colunaInicial, int linhaInicial){
 	JOG_ImprimirPosicoes();
 	JOG_ValidarAmeacantes(colunaInicial, linhaInicial);
 	JOG_ValidarAmeacados(colunaInicial,  linhaInicial);
+	if(JOG_ValidarReis() == JOGCondRetCheckMate){
+		shutDownHook();
+	}
 	printf("\n");
 }
 
-
+/*Funcao principal*/
 int main(void){
 	int linhaFinal;
 	int linhaInicial;
@@ -63,6 +73,9 @@ int main(void){
 	
 	char colunaInicial;
 	char colunaFinal;
+	
+	char origem[4];
+	char destino[4];
 	
 	char* endCond = (char*) malloc(sizeof(char)*4);
 	if(endCond == NULL) exit(1);
@@ -119,8 +132,7 @@ int main(void){
 		}
 	}
 	
-	printf("\n\nObrigado por jogar o Xadrez Voador, volte sempre :-)\n\n");
-	
+	shutDownHook();
 	return 42;
 }			
 

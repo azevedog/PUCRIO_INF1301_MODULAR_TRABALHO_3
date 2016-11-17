@@ -26,10 +26,11 @@
 #include    "JOGO.h"
 
 static const char INIT_JOG_CMD         [ ] = "=initjogo"     ;
-static const char PRINT_POS_CMD         [ ] = "=printpos"     ;
 static const char MOV_PEC_CMD         [ ] = "=movpec"     ;
 static const char VAL_AMEACANTES_CMD         [ ] = "=valameacante";
 static const char VAL_AMEACADOS_CMD         [ ] = "=valameacado";
+static const char VAL_REIS_CMD         [ ] = "=valreis";
+static const char PRINT_POS_CMD         [ ] = "=printpos"     ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 		
@@ -52,6 +53,7 @@ static const char VAL_AMEACADOS_CMD         [ ] = "=valameacado";
 *     =movpec             string int string int CondRetEsp
 *	  =valameacante			string int CondRetEsp
 *	  =valameacado			string int CondRetEsp
+*	  =valreis			CondRetEsp
 *
 ***********************************************************************/
 
@@ -148,6 +150,21 @@ static const char VAL_AMEACADOS_CMD         [ ] = "=valameacado";
 			return TST_CompararInt(condRetEsp, condRet,
                "Erro ao validar ameacados as posicoes") ;
 		}/* fim ativa: Validar Ameacados */
+		
+		/* Testar Validar Reis */
+		else if  ( strcmp( ComandoTeste , VAL_REIS_CMD) == 0 ){
+			
+			numLidos = LER_LerParametros("i" , &condRetEsp);
+				
+            if (numLidos != 1){
+               return TST_CondRetParm ;
+            }
+			
+			condRet = JOG_ValidarReis();
+			
+			return TST_CompararInt(condRetEsp, condRet,
+               "Erro ao validar reis as posicoes") ;
+		}/* fim ativa: Validar Reis */
 		
       return TST_CondRetNaoConhec ;
 
